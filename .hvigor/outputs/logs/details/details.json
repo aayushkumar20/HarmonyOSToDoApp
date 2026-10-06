@@ -1,0 +1,82 @@
+{
+  "HVIGOR_OHOS_PLUGIN": {
+    "MODULES": [
+      {
+        "MODULE_NAME": "923fe53966c6cd9343e11af776cd4b05be315ea4b200b02e4d5dfb0f929b73bf",
+        "API_TYPE": "stageMode",
+        "INCLUDE_IN_BUILD": true,
+        "IS_COMMAND_LINE_ENTRY_MODULE": true,
+        "BUILD_OPTION": [
+          {
+            "path": "debuggable",
+            "traceValue": true,
+            "value": true
+          },
+          {
+            "path": "copyFrom",
+            "traceValue": false,
+            "value": ""
+          }
+        ],
+        "PACKAGE_JSON": [],
+        "MODULE_TYPE": "entry",
+        "IS_INCREMENTAL_MODULE": true
+      }
+    ],
+    "NATIVE_COMPILER": "Default",
+    "IS_FULL_BUILD": false,
+    "PACKAGE_JSON": [],
+    "BUILD_MODE": "debug"
+  },
+  "HVIGOR": {
+    "IS_INCREMENTAL": true,
+    "IS_DAEMON": true,
+    "IS_PARALLEL": true,
+    "IS_HVIGORFILE_TYPE_CHECK": false,
+    "IS_EXECUTION_OHPM_BY_HVIGOR": false,
+    "BUILD_ANALYSIS_MODE": "normal",
+    "TASK_TIME": {
+      "923fe53966c6cd9343e11af776cd4b05be315ea4b200b02e4d5dfb0f929b73bf": {
+        "init": 328042,
+        "PreBuild": 116090917,
+        "CreateModuleInfo": 381416,
+        "MergeProfile": 2237583,
+        "CreateBuildProfile": 937584,
+        "PreCheckSyscap": 174334,
+        "GeneratePkgContextInfo": 4367916,
+        "ProcessProfile": 149106000,
+        "ProcessRouterMap": 1202667,
+        "ProcessShareConfig": 974041,
+        "ProcessStartupConfig": 581417,
+        "PreviewProcessResource": 723458,
+        "GenerateLoaderJson": 4283084
+      },
+      "APP": {
+        "init": 134333
+      }
+    },
+    "CUSTOM_TASK_TIME": {},
+    "CUSTOM_PLUGIN_TIME": {},
+    "APIS": [
+      "getProperty"
+    ],
+    "CONFIG_EXPERIMENT": {
+      "ENABLE_MODULE_SKIP": false,
+      "ENABLE_CPP_FUNCTION_LEVEL_INCREMENTAL": false
+    },
+    "CONFIG_PROPERTIES": {},
+    "BUILD_ID": "202610062157424340",
+    "ERROR_MESSAGE": [
+      {
+        "CODE": "11211120",
+        "STACK": "...",
+        "PROJECT_CONFIG": {}
+      },
+      {
+        "CODE": "11211120",
+        "TIMESTAMP": "1791304062941"
+      }
+    ],
+    "TOTAL_TIME": 507351542
+  }
+}
