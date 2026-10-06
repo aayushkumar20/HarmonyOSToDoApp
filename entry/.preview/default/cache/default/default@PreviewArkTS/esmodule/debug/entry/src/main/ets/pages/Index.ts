@@ -78,31 +78,61 @@ class Index extends ViewPU {
     set selectedDate(newValue: Date) {
         this.__selectedDate.set(newValue);
     }
+    aboutToAppear() {
+        // Generate some mock tasks for preview purposes if empty
+        if (this.tasks.length === 0) {
+            this.tasks.push(new TaskDataModel("Initialize Core", "SYSTEM_BOOT", false, new Date()));
+        }
+    }
+    isKawaii(): boolean {
+        return this.appThemeStr === 'kawaii';
+    }
+    getDaysInWeek(): Date[] {
+        let days: Date[] = [];
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        for (let i = 0; i < 14; i++) {
+            let d = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
+            days.push(d);
+        }
+        return days;
+    }
+    getFilteredTasks(): TaskDataModel[] {
+        return this.tasks.filter(t => {
+            let tD = new Date(t.dueDate);
+            return tD.getFullYear() === this.selectedDate.getFullYear() &&
+                tD.getMonth() === this.selectedDate.getMonth() &&
+                tD.getDate() === this.selectedDate.getDate();
+        });
+    }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Stack.create();
-            Stack.debugLine("entry/src/main/ets/pages/Index.ets(36:5)", "entry");
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(44:5)", "entry");
+            Stack.width('100%');
+            Stack.height('100%');
+            Stack.backgroundColor(this.isKawaii() ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace);
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // Background
+            // Deep Space / Kawaii Background
             Rect.create();
-            Rect.debugLine("entry/src/main/ets/pages/Index.ets(38:7)", "entry");
-            // Background
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(46:7)", "entry");
+            // Deep Space / Kawaii Background
             Rect.width('100%');
-            // Background
+            // Deep Space / Kawaii Background
             Rect.height('100%');
-            // Background
-            Rect.fill(this.isKawaii ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace);
+            // Deep Space / Kawaii Background
+            Rect.fill(this.isKawaii() ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace);
         }, Rect);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // Floating Overlay
-            if (this.isKawaii) {
+            // Decorative Overlay (Must not block touches)
+            if (this.isKawaii()) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new FloatingAnimalsOverlay(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 44, col: 9 });
+                                let componentCall = new FloatingAnimalsOverlay(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 52, col: 9 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -121,7 +151,7 @@ class Index extends ViewPU {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new FloatingBotsOverlay(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 46, col: 9 });
+                                let componentCall = new FloatingBotsOverlay(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 54, col: 9 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -138,68 +168,73 @@ class Index extends ViewPU {
         }, If);
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create({ space: 20 });
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(49:7)", "entry");
+            Column.create({ space: 24 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(57:7)", "entry");
+            Column.width('100%');
+            Column.height('100%');
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // Header Bar
+            // Header Area
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(51:9)", "entry");
-            // Header Bar
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(59:9)", "entry");
+            // Header Area
             Row.width('100%');
-            // Header Bar
-            Row.padding({ left: 20, right: 20, top: 40 });
+            // Header Area
+            Row.padding({ left: 24, right: 24, top: 50 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(52:11)", "entry");
+            Column.create({ space: 4 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(60:11)", "entry");
             Column.alignItems(HorizontalAlign.Start);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.isKawaii ? "Magic Checklist 🎀" : "SYS.TODOS: ONNX");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(53:13)", "entry");
-            Text.fontSize(24);
-            Text.fontWeight(FontWeight.Bold);
-            Text.fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta);
+            Text.create(this.isKawaii() ? "Magic Checklist 🎀" : "SYS.TODOS: ONNX");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(61:13)", "entry");
+            Text.fontSize(22);
+            Text.fontWeight(FontWeight.Bolder);
+            Text.fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta);
+            Text.fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace');
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.isKawaii ? "Cute Magical Scanner 🐰✨" : "DATA_STREAM_ACTIVE");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(57:13)", "entry");
-            Text.fontSize(14);
-            Text.fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan);
+            Text.create(this.isKawaii() ? "Cute Magical Scanner 🐰✨" : "DATA_STREAM_ACTIVE");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(67:13)", "entry");
+            Text.fontSize(12);
+            Text.fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan);
+            Text.fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace');
+            Text.opacity(0.8);
         }, Text);
         Text.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/Index.ets(63:11)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/Index.ets(75:11)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create({ space: 12 });
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(65:11)", "entry");
+            Row.create({ space: 10 });
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(77:11)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // Theme Switcher Toggle
             Button.createWithChild({ type: ButtonType.Circle });
-            Button.debugLine("entry/src/main/ets/pages/Index.ets(67:13)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(79:13)", "entry");
             // Theme Switcher Toggle
-            Button.backgroundColor(SciFiTheme.panelBackground);
+            Button.backgroundColor(this.isKawaii() ? '#33FF69B4' : '#1A00FFFF');
             // Theme Switcher Toggle
-            Button.width(40);
+            Button.width(36);
             // Theme Switcher Toggle
-            Button.height(40);
+            Button.height(36);
             // Theme Switcher Toggle
             Button.onClick(() => {
-                this.appThemeStr = this.isKawaii ? 'scifi' : 'kawaii';
+                this.appThemeStr = this.isKawaii() ? 'scifi' : 'kawaii';
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.isKawaii ? "✨" : "⬡");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(68:15)", "entry");
-            Text.fontSize(20);
-            Text.fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan);
+            Text.create(this.isKawaii() ? "✨" : "⬡");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(80:15)", "entry");
+            Text.fontSize(18);
+            Text.fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan);
         }, Text);
         Text.pop();
         // Theme Switcher Toggle
@@ -207,25 +242,25 @@ class Index extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // Add Button
             Button.createWithChild({ type: ButtonType.Circle });
-            Button.debugLine("entry/src/main/ets/pages/Index.ets(79:13)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(91:13)", "entry");
             // Add Button
-            Button.backgroundColor(this.isKawaii ? SciFiTheme.neonCyan : '#2600FFFF');
+            Button.backgroundColor(this.isKawaii() ? SciFiTheme.kawaiiPink : '#2600FFFF');
             // Add Button
-            Button.width(40);
+            Button.width(36);
             // Add Button
-            Button.height(40);
+            Button.height(36);
             // Add Button
             Button.onClick(() => {
-                let newTask = new TaskDataModel("New Manual Task", "MANUAL_INJECT", false, this.selectedDate);
+                let newTask = new TaskDataModel("New Task", "MANUAL_INJECT", false, this.selectedDate);
                 this.tasks.push(newTask);
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("+");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(80:15)", "entry");
-            Text.fontSize(24);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(92:15)", "entry");
+            Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
-            Text.fontColor(this.isKawaii ? Color.White : SciFiTheme.neonCyan);
+            Text.fontColor(this.isKawaii() ? Color.White : SciFiTheme.neonCyan);
         }, Text);
         Text.pop();
         // Add Button
@@ -233,38 +268,38 @@ class Index extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // Scanner Button
             Button.createWithChild({ type: ButtonType.Circle });
-            Button.debugLine("entry/src/main/ets/pages/Index.ets(93:13)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(105:13)", "entry");
             // Scanner Button
-            Button.backgroundColor(this.isKawaii ? SciFiTheme.neonMagenta : '#26FF00FF');
+            Button.backgroundColor(this.isKawaii() ? SciFiTheme.kawaiiPink : 'transparent');
             // Scanner Button
-            Button.width(40);
+            Button.width(36);
             // Scanner Button
-            Button.height(40);
+            Button.height(36);
             // Scanner Button
-            Button.border({ width: this.isKawaii ? 0 : 1.5, color: SciFiTheme.neonMagenta });
+            Button.border({ width: this.isKawaii() ? 0 : 1, color: SciFiTheme.neonMagenta });
             // Scanner Button
             Button.onClick(() => {
-                let newTask = new TaskDataModel("Scanned Bill", "EXTRACT_SUCCESS", true, this.selectedDate);
+                let newTask = new TaskDataModel("Scanned Document", "EXTRACT_SUCCESS", true, this.selectedDate);
                 this.tasks.push(newTask);
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("📷");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(94:15)", "entry");
-            Text.fontSize(20);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(106:15)", "entry");
+            Text.fontSize(16);
         }, Text);
         Text.pop();
         // Scanner Button
         Button.pop();
         Row.pop();
-        // Header Bar
+        // Header Area
         Row.pop();
         {
             this.observeComponentCreation2((elmtId, isInitialRender) => {
                 if (isInitialRender) {
                     let componentCall = new 
-                    // Dashboard Charts
-                    CuteDashboardChart(this, { tasks: this.tasks }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 110, col: 9 });
+                    // Beautiful Chart
+                    CuteDashboardChart(this, { tasks: this.__tasks }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 122, col: 9 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {
@@ -274,81 +309,83 @@ class Index extends ViewPU {
                     componentCall.paramsGenerator_ = paramsLambda;
                 }
                 else {
-                    this.updateStateVarsOfChildByElmtId(elmtId, {
-                        tasks: this.tasks
-                    });
+                    this.updateStateVarsOfChildByElmtId(elmtId, {});
                 }
             }, { name: "CuteDashboardChart" });
         }
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // Apple Calendar Scroll View
+            // Horizontal Apple-style Calendar
             Scroll.create();
-            Scroll.debugLine("entry/src/main/ets/pages/Index.ets(113:9)", "entry");
-            // Apple Calendar Scroll View
+            Scroll.debugLine("entry/src/main/ets/pages/Index.ets(125:9)", "entry");
+            // Horizontal Apple-style Calendar
             Scroll.scrollable(ScrollDirection.Horizontal);
-            // Apple Calendar Scroll View
+            // Horizontal Apple-style Calendar
             Scroll.scrollBar(BarState.Off);
+            // Horizontal Apple-style Calendar
+            Scroll.width('100%');
         }, Scroll);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create({ space: 15 });
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(114:11)", "entry");
-            Row.padding({ left: 20, right: 20 });
+            Row.create({ space: 12 });
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(126:11)", "entry");
+            Row.padding({ left: 24, right: 24 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
             const forEachItemGenFunction = _item => {
                 const day = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Column.create();
-                    Column.debugLine("entry/src/main/ets/pages/Index.ets(116:15)", "entry");
-                    Column.padding({ top: 12, bottom: 12, left: 16, right: 16 });
-                    Column.backgroundColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? SciFiTheme.neonMagenta : '#990B132B');
-                    Column.borderRadius(20);
+                    Column.create({ space: 4 });
+                    Column.debugLine("entry/src/main/ets/pages/Index.ets(128:15)", "entry");
+                    Column.width(55);
+                    Column.padding({ top: 12, bottom: 12 });
+                    Column.backgroundColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? (this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan) : (this.isKawaii() ? '#1AFF69B4' : SciFiTheme.panelBackground));
+                    Column.borderRadius(30);
                     Column.onClick(() => {
                         this.selectedDate = day;
                     });
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(day.toString().substring(0, 3));
-                    Text.debugLine("entry/src/main/ets/pages/Index.ets(117:17)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/Index.ets(129:17)", "entry");
                     Text.fontSize(12);
-                    Text.fontWeight(FontWeight.Bold);
-                    Text.fontColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? SciFiTheme.textMain : SciFiTheme.textSecondary);
+                    Text.fontWeight(FontWeight.Medium);
+                    Text.fontColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? (this.isKawaii() ? Color.White : SciFiTheme.bgDeepSpace) : SciFiTheme.textSecondary);
                 }, Text);
                 Text.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(day.getDate().toString());
-                    Text.debugLine("entry/src/main/ets/pages/Index.ets(121:17)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/Index.ets(133:17)", "entry");
                     Text.fontSize(18);
                     Text.fontWeight(FontWeight.Bolder);
-                    Text.fontColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? SciFiTheme.textMain : SciFiTheme.textMain);
+                    Text.fontColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? (this.isKawaii() ? Color.White : SciFiTheme.bgDeepSpace) : SciFiTheme.textMain);
                 }, Text);
                 Text.pop();
                 Column.pop();
             };
-            this.forEachUpdateFunction(elmtId, this.daysInWeek, forEachItemGenFunction);
+            this.forEachUpdateFunction(elmtId, this.getDaysInWeek(), forEachItemGenFunction);
         }, ForEach);
         ForEach.pop();
         Row.pop();
-        // Apple Calendar Scroll View
+        // Horizontal Apple-style Calendar
         Scroll.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // Filtered Task UI
-            if (this.filteredTasks.length === 0) {
+            // Tasks List
+            if (this.getFilteredTasks().length === 0) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
-                        Column.debugLine("entry/src/main/ets/pages/Index.ets(141:11)", "entry");
+                        Column.debugLine("entry/src/main/ets/pages/Index.ets(155:11)", "entry");
                         Column.justifyContent(FlexAlign.Center);
                         Column.layoutWeight(1);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(this.isKawaii ? "No Magical Tasks Today! 🐹✨" : "AWAITING_NEURAL_LINK...");
-                        Text.debugLine("entry/src/main/ets/pages/Index.ets(142:13)", "entry");
-                        Text.fontSize(16);
+                        Text.create(this.isKawaii() ? "No Magical Tasks Today! 🐹✨" : "AWAITING_NEURAL_LINK...");
+                        Text.debugLine("entry/src/main/ets/pages/Index.ets(156:13)", "entry");
+                        Text.fontSize(14);
                         Text.fontWeight(FontWeight.Bold);
                         Text.fontColor(SciFiTheme.textSecondary);
+                        Text.fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace');
                     }, Text);
                     Text.pop();
                     Column.pop();
@@ -357,9 +394,10 @@ class Index extends ViewPU {
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        List.create({ space: 10 });
-                        List.debugLine("entry/src/main/ets/pages/Index.ets(150:11)", "entry");
-                        List.padding({ left: 20, right: 20 });
+                        List.create({ space: 12 });
+                        List.debugLine("entry/src/main/ets/pages/Index.ets(165:11)", "entry");
+                        List.padding({ left: 24, right: 24, bottom: 20 });
+                        List.scrollBar(BarState.Off);
                         List.layoutWeight(1);
                     }, List);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -377,14 +415,14 @@ class Index extends ViewPU {
                                 };
                                 const itemCreation2 = (elmtId, isInitialRender) => {
                                     ListItem.create(deepRenderFunction, true);
-                                    ListItem.debugLine("entry/src/main/ets/pages/Index.ets(152:15)", "entry");
+                                    ListItem.debugLine("entry/src/main/ets/pages/Index.ets(167:15)", "entry");
                                 };
                                 const deepRenderFunction = (elmtId, isInitialRender) => {
                                     itemCreation(elmtId, isInitialRender);
                                     {
                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                                             if (isInitialRender) {
-                                                let componentCall = new TaskRowView(this, { task: task }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 153, col: 17 });
+                                                let componentCall = new TaskRowView(this, { task: task }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 168, col: 17 });
                                                 ViewPU.create(componentCall);
                                                 let paramsLambda = () => {
                                                     return {
@@ -406,7 +444,7 @@ class Index extends ViewPU {
                                 ListItem.pop();
                             }
                         };
-                        this.forEachUpdateFunction(elmtId, this.filteredTasks, forEachItemGenFunction);
+                        this.forEachUpdateFunction(elmtId, this.getFilteredTasks(), forEachItemGenFunction);
                     }, ForEach);
                     ForEach.pop();
                     List.pop();
@@ -436,14 +474,13 @@ class CuteDashboardChart extends ViewPU {
             this.paramsGenerator_ = paramsLambda;
         }
         this.__appThemeStr = this.createStorageLink('app_theme', 'scifi', "appThemeStr");
-        this.__tasks = new SynchedPropertyObjectOneWayPU(params.tasks, this, "tasks");
+        this.__tasks = new SynchedPropertyObjectTwoWayPU(params.tasks, this, "tasks");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params: CuteDashboardChart_Params) {
     }
     updateStateVars(params: CuteDashboardChart_Params) {
-        this.__tasks.reset(params.tasks);
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__appThemeStr.purgeDependencyOnElmtId(rmElmtId);
@@ -469,74 +506,118 @@ class CuteDashboardChart extends ViewPU {
     set tasks(newValue: TaskDataModel[]) {
         this.__tasks.set(newValue);
     }
+    isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
+    getCompletedCount(): number { return this.tasks.filter(t => t.completed).length; }
+    getPendingCount(): number { return this.tasks.filter(t => !t.completed).length; }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(181:5)", "entry");
-            Column.padding(15);
-            Column.backgroundColor(SciFiTheme.panelBackground);
-            Column.borderRadius(15);
-            Column.margin({ left: 20, right: 20 });
+            Column.create({ space: 15 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(206:5)", "entry");
+            Column.padding(20);
+            Column.backgroundColor(this.isKawaii() ? '#FFFFFF' : SciFiTheme.panelBackground);
+            Column.borderRadius(20);
+            Column.margin({ left: 24, right: 24 });
+            Column.shadow({ radius: 15, color: this.isKawaii() ? 'rgba(255, 105, 180, 0.1)' : 'rgba(0, 255, 255, 0.05)', offsetY: 5 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.isKawaii ? "Magical Progress 🌸" : "SYSTEM_DIAGNOSTICS");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(182:7)", "entry");
-            Text.fontSize(14);
-            Text.fontColor(SciFiTheme.neonMagenta);
-            Text.margin({ bottom: 10 });
+            Text.create(this.isKawaii() ? "Magical Progress 🌸" : "SYSTEM_DIAGNOSTICS");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(207:7)", "entry");
+            Text.fontSize(13);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta);
+            Text.fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace');
+            Text.width('100%');
+            Text.textAlign(TextAlign.Start);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(187:7)", "entry");
+            Row.create({ space: 20 });
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(215:7)", "entry");
             Row.width('100%');
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(188:9)", "entry");
+            Column.create({ space: 8 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(216:9)", "entry");
+            Column.layoutWeight(1);
             Column.alignItems(HorizontalAlign.Start);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.isKawaii ? "Finished! ✨" : "DATA_RESOLVED");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(189:11)", "entry");
-            Text.fontSize(12);
+            Text.create(this.isKawaii() ? "Finished! ✨" : "DATA_RESOLVED");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(217:11)", "entry");
+            Text.fontSize(10);
+            Text.fontWeight(FontWeight.Bold);
             Text.fontColor(SciFiTheme.textSecondary);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Horizontal Bar for Completed
+            Stack.create({ alignContent: Alignment.Start });
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(223:11)", "entry");
+            // Horizontal Bar for Completed
+            Stack.width('100%');
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Rect.create();
-            Rect.debugLine("entry/src/main/ets/pages/Index.ets(192:11)", "entry");
-            Rect.width(Math.max(10, this.completedCount * 30) + 'px');
-            Rect.height(20);
-            Rect.fill(SciFiTheme.neonGreen);
-            Rect.borderRadius(5);
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(224:13)", "entry");
+            Rect.width('100%');
+            Rect.height(8);
+            Rect.fill(this.isKawaii() ? '#1AFF69B4' : '#1A39FF14');
+            Rect.borderRadius(4);
         }, Rect);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Rect.create();
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(225:13)", "entry");
+            globalThis.Context.animation({ duration: 300, curve: Curve.EaseOut });
+            Rect.width(this.getCompletedCount() === 0 ? '5%' : Math.min(100, (this.getCompletedCount() / Math.max(1, this.tasks.length)) * 100) + '%');
+            Rect.height(8);
+            Rect.fill(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonGreen);
+            Rect.borderRadius(4);
+            globalThis.Context.animation(null);
+        }, Rect);
+        // Horizontal Bar for Completed
+        Stack.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/Index.ets(195:9)", "entry");
-        }, Blank);
-        Blank.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(197:9)", "entry");
-            Column.alignItems(HorizontalAlign.End);
+            Column.create({ space: 8 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(234:9)", "entry");
+            Column.layoutWeight(1);
+            Column.alignItems(HorizontalAlign.Start);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.isKawaii ? "To Do 🐰" : "PENDING_OPS");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(198:11)", "entry");
-            Text.fontSize(12);
+            Text.create(this.isKawaii() ? "To Do 🐰" : "PENDING_OPS");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(235:11)", "entry");
+            Text.fontSize(10);
+            Text.fontWeight(FontWeight.Bold);
             Text.fontColor(SciFiTheme.textSecondary);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Horizontal Bar for Pending
+            Stack.create({ alignContent: Alignment.Start });
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(241:11)", "entry");
+            // Horizontal Bar for Pending
+            Stack.width('100%');
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Rect.create();
-            Rect.debugLine("entry/src/main/ets/pages/Index.ets(201:11)", "entry");
-            Rect.width(Math.max(10, this.pendingCount * 30) + 'px');
-            Rect.height(20);
-            Rect.fill(SciFiTheme.neonCyan);
-            Rect.borderRadius(5);
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(242:13)", "entry");
+            Rect.width('100%');
+            Rect.height(8);
+            Rect.fill(this.isKawaii() ? '#1A00FFFF' : '#1A00FFFF');
+            Rect.borderRadius(4);
         }, Rect);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Rect.create();
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(243:13)", "entry");
+            globalThis.Context.animation({ duration: 300, curve: Curve.EaseOut });
+            Rect.width(this.getPendingCount() === 0 ? '5%' : Math.min(100, (this.getPendingCount() / Math.max(1, this.tasks.length)) * 100) + '%');
+            Rect.height(8);
+            Rect.fill(SciFiTheme.neonCyan);
+            Rect.borderRadius(4);
+            globalThis.Context.animation(null);
+        }, Rect);
+        // Horizontal Bar for Pending
+        Stack.pop();
         Column.pop();
         Row.pop();
         Column.pop();
@@ -583,32 +664,35 @@ class TaskRowView extends ViewPU {
     get task() {
         return this.__task.get();
     }
+    isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(221:5)", "entry");
-            Row.padding(15);
-            Row.backgroundColor(SciFiTheme.panelBackground);
-            Row.borderRadius(15);
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(270:5)", "entry");
+            Row.padding(20);
+            Row.backgroundColor(this.isKawaii() ? '#FFFFFF' : SciFiTheme.panelBackground);
+            Row.borderRadius(20);
             Row.width('100%');
+            Row.shadow({ radius: 10, color: 'rgba(0,0,0,0.1)', offsetY: 4 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create({ space: 6 });
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(222:7)", "entry");
+            Column.create({ space: 8 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(271:7)", "entry");
             Column.alignItems(HorizontalAlign.Start);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(223:9)", "entry");
+            Row.create({ space: 6 });
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(272:9)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
             if (this.task.isMLGenerated) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(this.isKawaii ? "🪄 " : "⚡ ");
-                        Text.debugLine("entry/src/main/ets/pages/Index.ets(225:13)", "entry");
-                        Text.fontColor(SciFiTheme.neonMagenta);
+                        Text.create(this.isKawaii() ? "🪄" : "⚡");
+                        Text.debugLine("entry/src/main/ets/pages/Index.ets(274:13)", "entry");
+                        Text.fontSize(14);
+                        Text.fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta);
                     }, Text);
                     Text.pop();
                 });
@@ -621,11 +705,12 @@ class TaskRowView extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.task.title);
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(228:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(278:11)", "entry");
             Text.fontSize(16);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor(this.task.completed ? SciFiTheme.textSecondary : SciFiTheme.textMain);
             Text.decoration({ type: this.task.completed ? TextDecorationType.LineThrough : TextDecorationType.None });
+            Text.fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace');
         }, Text);
         Text.pop();
         Row.pop();
@@ -635,9 +720,10 @@ class TaskRowView extends ViewPU {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create(this.task.details);
-                        Text.debugLine("entry/src/main/ets/pages/Index.ets(236:11)", "entry");
-                        Text.fontSize(10);
+                        Text.debugLine("entry/src/main/ets/pages/Index.ets(287:11)", "entry");
+                        Text.fontSize(11);
                         Text.fontColor(SciFiTheme.neonCyan);
+                        Text.fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace');
                     }, Text);
                     Text.pop();
                 });
@@ -649,19 +735,20 @@ class TaskRowView extends ViewPU {
         }, If);
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(241:9)", "entry");
+            Row.create({ space: 4 });
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(293:9)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create("🕒 ");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(242:11)", "entry");
-            Text.fontColor(SciFiTheme.neonMagenta);
+            Text.create("🕒");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(294:11)", "entry");
+            Text.fontSize(10);
+            Text.fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.task.dueDate.toLocaleTimeString());
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(244:11)", "entry");
-            Text.fontSize(10);
+            Text.create(this.task.dueDate.toLocaleTimeString().substring(0, 5));
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(297:11)", "entry");
+            Text.fontSize(11);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor(SciFiTheme.textSecondary);
         }, Text);
@@ -670,22 +757,26 @@ class TaskRowView extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/Index.ets(252:7)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/Index.ets(305:7)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Button.createWithChild({ type: ButtonType.Circle });
-            Button.debugLine("entry/src/main/ets/pages/Index.ets(254:7)", "entry");
-            Button.backgroundColor(Color.Transparent);
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(307:7)", "entry");
+            Button.backgroundColor(this.task.completed && this.isKawaii() ? SciFiTheme.kawaiiPink : 'transparent');
+            Button.width(36);
+            Button.height(36);
+            Button.border({ width: this.isKawaii() ? (this.task.completed ? 0 : 2) : 0, color: this.isKawaii() ? SciFiTheme.kawaiiPink : 'transparent', radius: 18 });
             Button.onClick(() => {
                 this.task.completed = !this.task.completed;
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.task.completed ? (this.isKawaii ? "✓" : "⬢") : (this.isKawaii ? "○" : "⬡"));
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(255:9)", "entry");
-            Text.fontSize(24);
-            Text.fontColor(this.task.completed ? SciFiTheme.neonGreen : SciFiTheme.neonCyan);
+            Text.create(this.task.completed ? (this.isKawaii() ? "✓" : "⬢") : (this.isKawaii() ? "" : "⬡"));
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(308:9)", "entry");
+            Text.fontSize(this.isKawaii() ? 18 : 26);
+            Text.fontWeight(FontWeight.Bolder);
+            Text.fontColor(this.task.completed ? (this.isKawaii() ? Color.White : SciFiTheme.neonGreen) : SciFiTheme.neonCyan);
         }, Text);
         Text.pop();
         Button.pop();
@@ -729,43 +820,48 @@ class FloatingAnimalsOverlay extends ViewPU {
     }
     aboutToAppear() {
         setInterval(() => {
-            this.yOffset = this.yOffset === 0 ? -20 : 0;
+            this.yOffset = this.yOffset === 0 ? -15 : 0;
         }, 2000);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Stack.create();
-            Stack.debugLine("entry/src/main/ets/pages/Index.ets(282:5)", "entry");
-            globalThis.Context.animation({ duration: 2000 });
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(339:5)", "entry");
             Stack.width('100%');
             Stack.height('100%');
-            globalThis.Context.animation(null);
+            Stack.hitTestBehavior(HitTestMode.None);
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("🦄");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(283:7)", "entry");
-            Text.fontSize(60);
-            Text.position({ x: '20%', y: '20%' });
-            Text.opacity(0.3);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(340:7)", "entry");
+            globalThis.Context.animation({ duration: 2500, curve: Curve.EaseInOut });
+            Text.fontSize(70);
+            Text.position({ x: '10%', y: '15%' });
+            Text.opacity(0.15);
             Text.translate({ y: this.yOffset });
+            globalThis.Context.animation(null);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("🐼");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(284:7)", "entry");
-            Text.fontSize(50);
-            Text.position({ x: '70%', y: '40%' });
-            Text.opacity(0.3);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(341:7)", "entry");
+            globalThis.Context.animation({ duration: 3000, curve: Curve.EaseInOut });
+            Text.fontSize(60);
+            Text.position({ x: '75%', y: '35%' });
+            Text.opacity(0.15);
             Text.translate({ y: -this.yOffset });
+            globalThis.Context.animation(null);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("🎀");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(285:7)", "entry");
-            Text.fontSize(70);
-            Text.position({ x: '40%', y: '70%' });
-            Text.opacity(0.2);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(342:7)", "entry");
+            globalThis.Context.animation({ duration: 2000, curve: Curve.EaseInOut });
+            Text.fontSize(80);
+            Text.position({ x: '45%', y: '75%' });
+            Text.opacity(0.10);
             Text.translate({ y: this.yOffset });
+            globalThis.Context.animation(null);
         }, Text);
         Text.pop();
         Stack.pop();
@@ -781,7 +877,7 @@ class FloatingBotsOverlay extends ViewPU {
             this.paramsGenerator_ = paramsLambda;
         }
         this.__yOffset = new ObservedPropertySimplePU(0, this, "yOffset");
-        this.__scanlineY = new ObservedPropertySimplePU(-200, this, "scanlineY");
+        this.__scanlineY = new ObservedPropertySimplePU(-100, this, "scanlineY");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -821,57 +917,89 @@ class FloatingBotsOverlay extends ViewPU {
     }
     aboutToAppear() {
         setInterval(() => {
-            this.yOffset = this.yOffset === 0 ? -20 : 0;
+            this.yOffset = this.yOffset === 0 ? -15 : 0;
         }, 2000);
         setInterval(() => {
-            this.scanlineY = this.scanlineY > 800 ? -200 : this.scanlineY + 5;
+            this.scanlineY = this.scanlineY > 1000 ? -100 : this.scanlineY + 10;
         }, 50);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Stack.create();
-            Stack.debugLine("entry/src/main/ets/pages/Index.ets(305:5)", "entry");
-            globalThis.Context.animation({ duration: 2000 });
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(364:5)", "entry");
             Stack.width('100%');
             Stack.height('100%');
-            globalThis.Context.animation(null);
+            Stack.hitTestBehavior(HitTestMode.None);
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Drones
             Text.create("👾");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(306:7)", "entry");
-            Text.fontSize(60);
-            Text.position({ x: '10%', y: '15%' });
-            Text.opacity(0.3);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(366:7)", "entry");
+            globalThis.Context.animation({ duration: 2500, curve: Curve.EaseInOut });
+            // Drones
+            Text.fontSize(70);
+            // Drones
+            Text.position({ x: '5%', y: '10%' });
+            // Drones
+            Text.opacity(0.15);
+            // Drones
             Text.translate({ y: this.yOffset });
+            globalThis.Context.animation(null);
         }, Text);
+        // Drones
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("🤖");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(307:7)", "entry");
-            Text.fontSize(50);
-            Text.position({ x: '80%', y: '30%' });
-            Text.opacity(0.3);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(367:7)", "entry");
+            globalThis.Context.animation({ duration: 3000, curve: Curve.EaseInOut });
+            Text.fontSize(60);
+            Text.position({ x: '80%', y: '25%' });
+            Text.opacity(0.15);
             Text.translate({ y: -this.yOffset });
+            globalThis.Context.animation(null);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("🛸");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(308:7)", "entry");
-            Text.fontSize(70);
-            Text.position({ x: '50%', y: '80%' });
-            Text.opacity(0.2);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(368:7)", "entry");
+            globalThis.Context.animation({ duration: 2000, curve: Curve.EaseInOut });
+            Text.fontSize(80);
+            Text.position({ x: '40%', y: '80%' });
+            Text.opacity(0.10);
             Text.translate({ y: this.yOffset });
+            globalThis.Context.animation(null);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Cyberpunk Scanner Line
+            Stack.create();
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(371:7)", "entry");
+            // Cyberpunk Scanner Line
+            Stack.position({ y: this.scanlineY });
+            // Cyberpunk Scanner Line
+            Stack.hitTestBehavior(HitTestMode.None);
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Rect.create();
-            Rect.debugLine("entry/src/main/ets/pages/Index.ets(310:7)", "entry");
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(372:9)", "entry");
             Rect.width('100%');
-            Rect.height(60);
+            Rect.height(2);
             Rect.fill(SciFiTheme.neonCyan);
-            Rect.opacity(0.2);
-            Rect.position({ y: this.scanlineY });
+            Rect.shadow({ radius: 10, color: SciFiTheme.neonCyan, offsetY: 0 });
         }, Rect);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Rect.create();
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(377:9)", "entry");
+            Rect.width('100%');
+            Rect.height(100);
+            Rect.linearGradient({
+                direction: GradientDirection.Bottom,
+                colors: [[SciFiTheme.neonCyan, 0.0], ['rgba(0,0,0,0)', 1.0]]
+            });
+            Rect.opacity(0.1);
+        }, Rect);
+        // Cyberpunk Scanner Line
+        Stack.pop();
         Stack.pop();
     }
     rerender() {

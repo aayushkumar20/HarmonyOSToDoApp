@@ -1,5 +1,6 @@
 import { TaskDataModel } from '../models/TaskDataModel';
 import { SciFiTheme } from '../theme/SciFiTheme';
+import window from '@ohos.window';
 
 @Entry
 @Component
@@ -8,6 +9,13 @@ struct Index {
   @State tasks: TaskDataModel[] = [];
   @State selectedDate: Date = new Date();
   
+  aboutToAppear() {
+    // Generate some mock tasks for preview purposes if empty
+    if (this.tasks.length === 0) {
+      this.tasks.push(new TaskDataModel("Initialize Core", "SYSTEM_BOOT", false, new Date()));
+    }
+  }
+
   isKawaii(): boolean {
     return this.appThemeStr === 'kawaii';
   }
@@ -34,43 +42,47 @@ struct Index {
 
   build() {
     Stack() {
-      // Background
+      // Deep Space / Kawaii Background
       Rect()
         .width('100%').height('100%')
         .fill(this.isKawaii() ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace)
       
-      // Floating Overlay
+      // Decorative Overlay (Must not block touches)
       if (this.isKawaii()) {
         FloatingAnimalsOverlay()
       } else {
         FloatingBotsOverlay()
       }
 
-      Column({ space: 20 }) {
-        // Header Bar
+      Column({ space: 24 }) {
+        // Header Area
         Row() {
-          Column() {
+          Column({ space: 4 }) {
             Text(this.isKawaii() ? "Magic Checklist 🎀" : "SYS.TODOS: ONNX")
-              .fontSize(24)
-              .fontWeight(FontWeight.Bold)
+              .fontSize(22)
+              .fontWeight(FontWeight.Bolder)
               .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
+              .fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace')
+            
             Text(this.isKawaii() ? "Cute Magical Scanner 🐰✨" : "DATA_STREAM_ACTIVE")
-              .fontSize(14)
+              .fontSize(12)
               .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
+              .fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace')
+              .opacity(0.8)
           }
           .alignItems(HorizontalAlign.Start)
 
           Blank()
 
-          Row({ space: 12 }) {
+          Row({ space: 10 }) {
             // Theme Switcher Toggle
             Button({ type: ButtonType.Circle }) {
               Text(this.isKawaii() ? "✨" : "⬡")
-                .fontSize(20)
+                .fontSize(18)
                 .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
             }
-            .backgroundColor(SciFiTheme.panelBackground)
-            .width(40).height(40)
+            .backgroundColor(this.isKawaii() ? '#33FF69B4' : '#1A00FFFF')
+            .width(36).height(36)
             .onClick(() => {
               this.appThemeStr = this.isKawaii() ? 'scifi' : 'kawaii';
             })
@@ -78,87 +90,96 @@ struct Index {
             // Add Button
             Button({ type: ButtonType.Circle }) {
               Text("+")
-                .fontSize(24)
+                .fontSize(20)
                 .fontWeight(FontWeight.Bold)
                 .fontColor(this.isKawaii() ? Color.White : SciFiTheme.neonCyan)
             }
-            .backgroundColor(this.isKawaii() ? SciFiTheme.neonCyan : '#2600FFFF')
-            .width(40).height(40)
+            .backgroundColor(this.isKawaii() ? SciFiTheme.kawaiiPink : '#2600FFFF')
+            .width(36).height(36)
             .onClick(() => {
-              let newTask = new TaskDataModel("New Manual Task", "MANUAL_INJECT", false, this.selectedDate);
+              let newTask = new TaskDataModel("New Task", "MANUAL_INJECT", false, this.selectedDate);
               this.tasks.push(newTask);
             })
 
             // Scanner Button
             Button({ type: ButtonType.Circle }) {
               Text("📷")
-                .fontSize(20)
+                .fontSize(16)
             }
-            .backgroundColor(this.isKawaii() ? SciFiTheme.neonMagenta : '#26FF00FF')
-            .width(40).height(40)
-            .border({ width: this.isKawaii() ? 0 : 1.5, color: SciFiTheme.neonMagenta })
+            .backgroundColor(this.isKawaii() ? SciFiTheme.kawaiiPink : 'transparent')
+            .width(36).height(36)
+            .border({ width: this.isKawaii() ? 0 : 1, color: SciFiTheme.neonMagenta })
             .onClick(() => {
-              let newTask = new TaskDataModel("Scanned Bill", "EXTRACT_SUCCESS", true, this.selectedDate);
+              let newTask = new TaskDataModel("Scanned Document", "EXTRACT_SUCCESS", true, this.selectedDate);
               this.tasks.push(newTask);
             })
           }
         }
         .width('100%')
-        .padding({ left: 20, right: 20, top: 40 })
+        .padding({ left: 24, right: 24, top: 50 }) // Account for status bar
 
-        // Dashboard Charts
+        // Beautiful Chart
         CuteDashboardChart({ tasks: $tasks })
 
-        // Apple Calendar Scroll View
+        // Horizontal Apple-style Calendar
         Scroll() {
-          Row({ space: 15 }) {
+          Row({ space: 12 }) {
             ForEach(this.getDaysInWeek(), (day: Date) => {
-              Column() {
+              Column({ space: 4 }) {
                 Text(day.toString().substring(0,3))
                   .fontSize(12)
-                  .fontWeight(FontWeight.Bold)
-                  .fontColor(this.isSameDay(day, this.selectedDate) ? SciFiTheme.textMain : SciFiTheme.textSecondary)
+                  .fontWeight(FontWeight.Medium)
+                  .fontColor(this.isSameDay(day, this.selectedDate) ? (this.isKawaii() ? Color.White : SciFiTheme.bgDeepSpace) : SciFiTheme.textSecondary)
                 Text(day.getDate().toString())
                   .fontSize(18)
                   .fontWeight(FontWeight.Bolder)
-                  .fontColor(this.isSameDay(day, this.selectedDate) ? SciFiTheme.textMain : SciFiTheme.textMain)
+                  .fontColor(this.isSameDay(day, this.selectedDate) ? (this.isKawaii() ? Color.White : SciFiTheme.bgDeepSpace) : SciFiTheme.textMain)
               }
-              .padding({ top: 12, bottom: 12, left: 16, right: 16 })
-              .backgroundColor(this.isSameDay(day, this.selectedDate) ? SciFiTheme.neonMagenta : '#990B132B')
-              .borderRadius(20)
+              .width(55)
+              .padding({ top: 12, bottom: 12 })
+              .backgroundColor(this.isSameDay(day, this.selectedDate) ? (this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan) : (this.isKawaii() ? '#1AFF69B4' : SciFiTheme.panelBackground))
+              .borderRadius(30)
               .onClick(() => {
                 this.selectedDate = day;
               })
             })
           }
-          .padding({ left: 20, right: 20 })
+          .padding({ left: 24, right: 24 })
         }
         .scrollable(ScrollDirection.Horizontal)
         .scrollBar(BarState.Off)
+        .width('100%')
 
-        // Filtered Task UI
+        // Tasks List
         if (this.getFilteredTasks().length === 0) {
           Column() {
             Text(this.isKawaii() ? "No Magical Tasks Today! 🐹✨" : "AWAITING_NEURAL_LINK...")
-              .fontSize(16)
+              .fontSize(14)
               .fontWeight(FontWeight.Bold)
               .fontColor(SciFiTheme.textSecondary)
+              .fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace')
           }
           .justifyContent(FlexAlign.Center)
           .layoutWeight(1)
         } else {
-          List({ space: 10 }) {
+          List({ space: 12 }) {
             ForEach(this.getFilteredTasks(), (task: TaskDataModel) => {
               ListItem() {
                 TaskRowView({ task: task })
               }
             })
           }
-          .padding({ left: 20, right: 20 })
+          .padding({ left: 24, right: 24, bottom: 20 })
+          .scrollBar(BarState.Off)
           .layoutWeight(1)
         }
       }
+      .width('100%')
+      .height('100%')
     }
+    .width('100%')
+    .height('100%')
+    .backgroundColor(this.isKawaii() ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace)
   }
 
   isSameDay(d1: Date, d2: Date): boolean {
@@ -167,6 +188,10 @@ struct Index {
            d1.getDate() === d2.getDate();
   }
 }
+
+// ----------------------------------------------------
+// Subcomponents
+// ----------------------------------------------------
 
 @Component
 struct CuteDashboardChart {
@@ -178,35 +203,59 @@ struct CuteDashboardChart {
   getPendingCount(): number { return this.tasks.filter(t => !t.completed).length; }
 
   build() {
-    Column() {
+    Column({ space: 15 }) {
       Text(this.isKawaii() ? "Magical Progress 🌸" : "SYSTEM_DIAGNOSTICS")
-        .fontSize(14)
-        .fontColor(SciFiTheme.neonMagenta)
-        .margin({ bottom: 10 })
+        .fontSize(13)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
+        .fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace')
+        .width('100%')
+        .textAlign(TextAlign.Start)
       
-      Row() {
-        Column() {
+      Row({ space: 20 }) {
+        Column({ space: 8 }) {
           Text(this.isKawaii() ? "Finished! ✨" : "DATA_RESOLVED")
-            .fontSize(12)
+            .fontSize(10)
+            .fontWeight(FontWeight.Bold)
             .fontColor(SciFiTheme.textSecondary)
-          Rect().width(Math.max(10, this.getCompletedCount() * 30) + 'px').height(20).fill(SciFiTheme.neonGreen).borderRadius(5)
-        }.alignItems(HorizontalAlign.Start)
+          
+          // Horizontal Bar for Completed
+          Stack({ alignContent: Alignment.Start }) {
+            Rect().width('100%').height(8).fill(this.isKawaii() ? '#1AFF69B4' : '#1A39FF14').borderRadius(4)
+            Rect()
+              .width(this.getCompletedCount() === 0 ? '5%' : Math.min(100, (this.getCompletedCount() / Math.max(1, this.tasks.length)) * 100) + '%')
+              .height(8)
+              .fill(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonGreen)
+              .borderRadius(4)
+              .animation({ duration: 300, curve: Curve.EaseOut })
+          }.width('100%')
+        }.layoutWeight(1).alignItems(HorizontalAlign.Start)
         
-        Blank()
-        
-        Column() {
+        Column({ space: 8 }) {
           Text(this.isKawaii() ? "To Do 🐰" : "PENDING_OPS")
-            .fontSize(12)
+            .fontSize(10)
+            .fontWeight(FontWeight.Bold)
             .fontColor(SciFiTheme.textSecondary)
-          Rect().width(Math.max(10, this.getPendingCount() * 30) + 'px').height(20).fill(SciFiTheme.neonCyan).borderRadius(5)
-        }.alignItems(HorizontalAlign.End)
+          
+          // Horizontal Bar for Pending
+          Stack({ alignContent: Alignment.Start }) {
+            Rect().width('100%').height(8).fill(this.isKawaii() ? '#1A00FFFF' : '#1A00FFFF').borderRadius(4)
+            Rect()
+              .width(this.getPendingCount() === 0 ? '5%' : Math.min(100, (this.getPendingCount() / Math.max(1, this.tasks.length)) * 100) + '%')
+              .height(8)
+              .fill(SciFiTheme.neonCyan)
+              .borderRadius(4)
+              .animation({ duration: 300, curve: Curve.EaseOut })
+          }.width('100%')
+        }.layoutWeight(1).alignItems(HorizontalAlign.Start)
       }
       .width('100%')
     }
-    .padding(15)
-    .backgroundColor(SciFiTheme.panelBackground)
-    .borderRadius(15)
-    .margin({ left: 20, right: 20 })
+    .padding(20)
+    .backgroundColor(this.isKawaii() ? '#FFFFFF' : SciFiTheme.panelBackground)
+    .borderRadius(20)
+    .margin({ left: 24, right: 24 })
+    .shadow({ radius: 15, color: this.isKawaii() ? 'rgba(255, 105, 180, 0.1)' : 'rgba(0, 255, 255, 0.05)', offsetY: 5 })
   }
 }
 
@@ -219,30 +268,34 @@ struct TaskRowView {
 
   build() {
     Row() {
-      Column({ space: 6 }) {
-        Row() {
+      Column({ space: 8 }) {
+        Row({ space: 6 }) {
           if (this.task.isMLGenerated) {
-            Text(this.isKawaii() ? "🪄 " : "⚡ ")
-              .fontColor(SciFiTheme.neonMagenta)
+            Text(this.isKawaii() ? "🪄" : "⚡")
+              .fontSize(14)
+              .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
           }
           Text(this.task.title)
             .fontSize(16)
             .fontWeight(FontWeight.Bold)
             .fontColor(this.task.completed ? SciFiTheme.textSecondary : SciFiTheme.textMain)
             .decoration({ type: this.task.completed ? TextDecorationType.LineThrough : TextDecorationType.None })
+            .fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace')
         }
         
         if (this.task.details) {
           Text(this.task.details)
-            .fontSize(10)
+            .fontSize(11)
             .fontColor(SciFiTheme.neonCyan)
+            .fontFamily(this.isKawaii() ? 'sans-serif' : 'monospace')
         }
         
-        Row() {
-          Text("🕒 ")
-            .fontColor(SciFiTheme.neonMagenta)
-          Text(this.task.dueDate.toLocaleTimeString())
+        Row({ space: 4 }) {
+          Text("🕒")
             .fontSize(10)
+            .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
+          Text(this.task.dueDate.toLocaleTimeString().substring(0, 5))
+            .fontSize(11)
             .fontWeight(FontWeight.Bold)
             .fontColor(SciFiTheme.textSecondary)
         }
@@ -252,19 +305,23 @@ struct TaskRowView {
       Blank()
       
       Button({ type: ButtonType.Circle }) {
-        Text(this.task.completed ? (this.isKawaii() ? "✓" : "⬢") : (this.isKawaii() ? "○" : "⬡"))
-          .fontSize(24)
-          .fontColor(this.task.completed ? SciFiTheme.neonGreen : SciFiTheme.neonCyan)
+        Text(this.task.completed ? (this.isKawaii() ? "✓" : "⬢") : (this.isKawaii() ? "" : "⬡"))
+          .fontSize(this.isKawaii() ? 18 : 26)
+          .fontWeight(FontWeight.Bolder)
+          .fontColor(this.task.completed ? (this.isKawaii() ? Color.White : SciFiTheme.neonGreen) : SciFiTheme.neonCyan)
       }
-      .backgroundColor(Color.Transparent)
+      .backgroundColor(this.task.completed && this.isKawaii() ? SciFiTheme.kawaiiPink : 'transparent')
+      .width(36).height(36)
+      .border({ width: this.isKawaii() ? (this.task.completed ? 0 : 2) : 0, color: this.isKawaii() ? SciFiTheme.kawaiiPink : 'transparent', radius: 18 })
       .onClick(() => {
         this.task.completed = !this.task.completed;
       })
     }
-    .padding(15)
-    .backgroundColor(SciFiTheme.panelBackground)
-    .borderRadius(15)
+    .padding(20)
+    .backgroundColor(this.isKawaii() ? '#FFFFFF' : SciFiTheme.panelBackground)
+    .borderRadius(20)
     .width('100%')
+    .shadow({ radius: 10, color: 'rgba(0,0,0,0.1)', offsetY: 4 })
   }
 }
 
@@ -274,45 +331,63 @@ struct FloatingAnimalsOverlay {
   
   aboutToAppear() {
     setInterval(() => {
-      this.yOffset = this.yOffset === 0 ? -20 : 0;
+      this.yOffset = this.yOffset === 0 ? -15 : 0;
     }, 2000);
   }
 
   build() {
     Stack() {
-      Text("🦄").fontSize(60).position({ x: '20%', y: '20%' }).opacity(0.3).translate({ y: this.yOffset })
-      Text("🐼").fontSize(50).position({ x: '70%', y: '40%' }).opacity(0.3).translate({ y: -this.yOffset })
-      Text("🎀").fontSize(70).position({ x: '40%', y: '70%' }).opacity(0.2).translate({ y: this.yOffset })
-    }.width('100%').height('100%').animation({ duration: 2000 })
+      Text("🦄").fontSize(70).position({ x: '10%', y: '15%' }).opacity(0.15).translate({ y: this.yOffset }).animation({ duration: 2500, curve: Curve.EaseInOut })
+      Text("🐼").fontSize(60).position({ x: '75%', y: '35%' }).opacity(0.15).translate({ y: -this.yOffset }).animation({ duration: 3000, curve: Curve.EaseInOut })
+      Text("🎀").fontSize(80).position({ x: '45%', y: '75%' }).opacity(0.10).translate({ y: this.yOffset }).animation({ duration: 2000, curve: Curve.EaseInOut })
+    }
+    .width('100%').height('100%')
+    .hitTestBehavior(HitTestMode.None)
   }
 }
 
 @Component
 struct FloatingBotsOverlay {
   @State yOffset: number = 0;
-  @State scanlineY: number = -200;
+  @State scanlineY: number = -100;
 
   aboutToAppear() {
     setInterval(() => {
-      this.yOffset = this.yOffset === 0 ? -20 : 0;
+      this.yOffset = this.yOffset === 0 ? -15 : 0;
     }, 2000);
     setInterval(() => {
-      this.scanlineY = this.scanlineY > 800 ? -200 : this.scanlineY + 5;
+      this.scanlineY = this.scanlineY > 1000 ? -100 : this.scanlineY + 10;
     }, 50);
   }
 
   build() {
     Stack() {
-      Text("👾").fontSize(60).position({ x: '10%', y: '15%' }).opacity(0.3).translate({ y: this.yOffset })
-      Text("🤖").fontSize(50).position({ x: '80%', y: '30%' }).opacity(0.3).translate({ y: -this.yOffset })
-      Text("🛸").fontSize(70).position({ x: '50%', y: '80%' }).opacity(0.2).translate({ y: this.yOffset })
+      // Drones
+      Text("👾").fontSize(70).position({ x: '5%', y: '10%' }).opacity(0.15).translate({ y: this.yOffset }).animation({ duration: 2500, curve: Curve.EaseInOut })
+      Text("🤖").fontSize(60).position({ x: '80%', y: '25%' }).opacity(0.15).translate({ y: -this.yOffset }).animation({ duration: 3000, curve: Curve.EaseInOut })
+      Text("🛸").fontSize(80).position({ x: '40%', y: '80%' }).opacity(0.10).translate({ y: this.yOffset }).animation({ duration: 2000, curve: Curve.EaseInOut })
       
-      Rect()
-        .width('100%')
-        .height(60)
-        .fill(SciFiTheme.neonCyan)
-        .opacity(0.2)
-        .position({ y: this.scanlineY })
-    }.width('100%').height('100%').animation({ duration: 2000 })
+      // Cyberpunk Scanner Line
+      Stack() {
+        Rect()
+          .width('100%')
+          .height(2)
+          .fill(SciFiTheme.neonCyan)
+          .shadow({ radius: 10, color: SciFiTheme.neonCyan, offsetY: 0 })
+        Rect()
+          .width('100%')
+          .height(100)
+          .linearGradient({
+            direction: GradientDirection.Bottom,
+            colors: [[SciFiTheme.neonCyan, 0.0], ['rgba(0,0,0,0)', 1.0]]
+          })
+          .opacity(0.1)
+      }
+      .position({ y: this.scanlineY })
+      .hitTestBehavior(HitTestMode.None)
+
+    }
+    .width('100%').height('100%')
+    .hitTestBehavior(HitTestMode.None)
   }
 }
