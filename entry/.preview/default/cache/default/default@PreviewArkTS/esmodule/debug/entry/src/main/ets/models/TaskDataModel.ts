@@ -1,3 +1,4 @@
+@Observed
 export class TaskDataModel {
     id: string;
     title: string;

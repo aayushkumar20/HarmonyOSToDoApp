@@ -1,4 +1,4 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ@œif (!("finalizeConstruction" in ViewPU.prototype)) {
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ•>if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 import { TaskDataModel } from '../models/TaskDataModel';
@@ -9,16 +9,13 @@ class Index extends ViewPU {
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
-        this.__isKawaii = new ObservedPropertySimplePU(false, this, "isKawaii");
+        this.__appThemeStr = this.createStorageLink('app_theme', 'scifi', "appThemeStr");
         this.__tasks = new ObservedPropertyObjectPU([], this, "tasks");
         this.__selectedDate = new ObservedPropertyObjectPU(new Date(), this, "selectedDate");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params) {
-        if (params.isKawaii !== undefined) {
-            this.isKawaii = params.isKawaii;
-        }
         if (params.tasks !== undefined) {
             this.tasks = params.tasks;
         }
@@ -29,22 +26,22 @@ class Index extends ViewPU {
     updateStateVars(params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
-        this.__isKawaii.purgeDependencyOnElmtId(rmElmtId);
+        this.__appThemeStr.purgeDependencyOnElmtId(rmElmtId);
         this.__tasks.purgeDependencyOnElmtId(rmElmtId);
         this.__selectedDate.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
-        this.__isKawaii.aboutToBeDeleted();
+        this.__appThemeStr.aboutToBeDeleted();
         this.__tasks.aboutToBeDeleted();
         this.__selectedDate.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
-    get isKawaii() {
-        return this.__isKawaii.get();
+    get appThemeStr() {
+        return this.__appThemeStr.get();
     }
-    set isKawaii(newValue) {
-        this.__isKawaii.set(newValue);
+    set appThemeStr(newValue) {
+        this.__appThemeStr.set(newValue);
     }
     get tasks() {
         return this.__tasks.get();
@@ -60,29 +57,84 @@ class Index extends ViewPU {
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(12:5)", "entry");
-            Column.width('100%');
-            Column.height('100%');
-            Column.backgroundColor(this.isKawaii ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace);
+            Stack.create();
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(36:5)", "entry");
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Background
+            Rect.create();
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(38:7)", "entry");
+            // Background
+            Rect.width('100%');
+            // Background
+            Rect.height('100%');
+            // Background
+            Rect.fill(this.isKawaii ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace);
+        }, Rect);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // Floating Overlay
+            if (this.isKawaii) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    {
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            if (isInitialRender) {
+                                let componentCall = new FloatingAnimalsOverlay(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 44, col: 9 });
+                                ViewPU.create(componentCall);
+                                let paramsLambda = () => {
+                                    return {};
+                                };
+                                componentCall.paramsGenerator_ = paramsLambda;
+                            }
+                            else {
+                                this.updateStateVarsOfChildByElmtId(elmtId, {});
+                            }
+                        }, { name: "FloatingAnimalsOverlay" });
+                    }
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    {
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            if (isInitialRender) {
+                                let componentCall = new FloatingBotsOverlay(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 46, col: 9 });
+                                ViewPU.create(componentCall);
+                                let paramsLambda = () => {
+                                    return {};
+                                };
+                                componentCall.paramsGenerator_ = paramsLambda;
+                            }
+                            else {
+                                this.updateStateVarsOfChildByElmtId(elmtId, {});
+                            }
+                        }, { name: "FloatingBotsOverlay" });
+                    }
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create({ space: 20 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(49:7)", "entry");
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // Header
+            // Header Bar
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/Index.ets(14:7)", "entry");
-            // Header
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(51:9)", "entry");
+            // Header Bar
             Row.width('100%');
-            // Header
-            Row.padding(20);
+            // Header Bar
+            Row.padding({ left: 20, right: 20, top: 40 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/pages/Index.ets(15:9)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(52:11)", "entry");
             Column.alignItems(HorizontalAlign.Start);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.isKawaii ? "Magic Checklist ğŸ€" : "SYS.TODOS: ONNX");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(16:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(53:13)", "entry");
             Text.fontSize(24);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta);
@@ -90,7 +142,7 @@ class Index extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.isKawaii ? "Cute Magical Scanner ğŸ°âœ¨" : "DATA_STREAM_ACTIVE");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(20:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(57:13)", "entry");
             Text.fontSize(14);
             Text.fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan);
         }, Text);
@@ -98,59 +150,59 @@ class Index extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/Index.ets(25:9)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/Index.ets(63:11)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // Theme Toggle
+            Row.create({ space: 12 });
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(65:11)", "entry");
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Theme Switcher Toggle
             Button.createWithChild({ type: ButtonType.Circle });
-            Button.debugLine("entry/src/main/ets/pages/Index.ets(28:9)", "entry");
-            // Theme Toggle
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(67:13)", "entry");
+            // Theme Switcher Toggle
             Button.backgroundColor(SciFiTheme.panelBackground);
-            // Theme Toggle
-            Button.onClick(() => {
-                this.isKawaii = !this.isKawaii;
-            });
-            // Theme Toggle
+            // Theme Switcher Toggle
             Button.width(40);
-            // Theme Toggle
+            // Theme Switcher Toggle
             Button.height(40);
-            // Theme Toggle
-            Button.margin({ right: 10 });
+            // Theme Switcher Toggle
+            Button.onClick(() => {
+                this.appThemeStr = this.isKawaii ? 'scifi' : 'kawaii';
+            });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.isKawaii ? "âœ¨" : "â¬¡");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(29:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(68:15)", "entry");
             Text.fontSize(20);
             Text.fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan);
         }, Text);
         Text.pop();
-        // Theme Toggle
+        // Theme Switcher Toggle
         Button.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // Add Button
             Button.createWithChild({ type: ButtonType.Circle });
-            Button.debugLine("entry/src/main/ets/pages/Index.ets(40:9)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(79:13)", "entry");
             // Add Button
-            Button.backgroundColor(this.isKawaii ? SciFiTheme.neonCyan : '#2200FFFF');
-            // Add Button
-            Button.onClick(() => {
-                // Manual add logic
-                let newTask = new TaskDataModel("New Manual Task", "MANUAL_INJECT", false, new Date());
-                this.tasks.push(newTask);
-            });
+            Button.backgroundColor(this.isKawaii ? SciFiTheme.neonCyan : '#2600FFFF');
             // Add Button
             Button.width(40);
             // Add Button
             Button.height(40);
             // Add Button
-            Button.margin({ right: 10 });
+            Button.onClick(() => {
+                let newTask = new TaskDataModel("New Manual Task", "MANUAL_INJECT", false, this.selectedDate);
+                this.tasks.push(newTask);
+            });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("+");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(41:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(80:15)", "entry");
             Text.fontSize(24);
-            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(this.isKawaii ? Color.White : SciFiTheme.neonCyan);
         }, Text);
         Text.pop();
         // Add Button
@@ -158,45 +210,121 @@ class Index extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // Scanner Button
             Button.createWithChild({ type: ButtonType.Circle });
-            Button.debugLine("entry/src/main/ets/pages/Index.ets(54:9)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(93:13)", "entry");
             // Scanner Button
-            Button.backgroundColor(this.isKawaii ? SciFiTheme.neonMagenta : '#22FF00FF');
-            // Scanner Button
-            Button.onClick(() => {
-                // Scanner UI logic
-                let newTask = new TaskDataModel("Scanned Bill", "EXTRACT_SUCCESS", true, new Date());
-                this.tasks.push(newTask);
-            });
+            Button.backgroundColor(this.isKawaii ? SciFiTheme.neonMagenta : '#26FF00FF');
             // Scanner Button
             Button.width(40);
             // Scanner Button
             Button.height(40);
+            // Scanner Button
+            Button.border({ width: this.isKawaii ? 0 : 1.5, color: SciFiTheme.neonMagenta });
+            // Scanner Button
+            Button.onClick(() => {
+                let newTask = new TaskDataModel("Scanned Bill", "EXTRACT_SUCCESS", true, this.selectedDate);
+                this.tasks.push(newTask);
+            });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create("ğŸ“·");
-            Text.debugLine("entry/src/main/ets/pages/Index.ets(55:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(94:15)", "entry");
             Text.fontSize(20);
         }, Text);
         Text.pop();
         // Scanner Button
         Button.pop();
-        // Header
         Row.pop();
+        // Header Bar
+        Row.pop();
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new 
+                    // Dashboard Charts
+                    CuteDashboardChart(this, { tasks: this.tasks }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 110, col: 9 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            tasks: this.tasks
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {
+                        tasks: this.tasks
+                    });
+                }
+            }, { name: "CuteDashboardChart" });
+        }
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Apple Calendar Scroll View
+            Scroll.create();
+            Scroll.debugLine("entry/src/main/ets/pages/Index.ets(113:9)", "entry");
+            // Apple Calendar Scroll View
+            Scroll.scrollable(ScrollDirection.Horizontal);
+            // Apple Calendar Scroll View
+            Scroll.scrollBar(BarState.Off);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create({ space: 15 });
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(114:11)", "entry");
+            Row.padding({ left: 20, right: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const day = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Column.create();
+                    Column.debugLine("entry/src/main/ets/pages/Index.ets(116:15)", "entry");
+                    Column.padding({ top: 12, bottom: 12, left: 16, right: 16 });
+                    Column.backgroundColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? SciFiTheme.neonMagenta : '#990B132B');
+                    Column.borderRadius(20);
+                    Column.onClick(() => {
+                        this.selectedDate = day;
+                    });
+                }, Column);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(day.toString().substring(0, 3));
+                    Text.debugLine("entry/src/main/ets/pages/Index.ets(117:17)", "entry");
+                    Text.fontSize(12);
+                    Text.fontWeight(FontWeight.Bold);
+                    Text.fontColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? SciFiTheme.textMain : SciFiTheme.textSecondary);
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(day.getDate().toString());
+                    Text.debugLine("entry/src/main/ets/pages/Index.ets(121:17)", "entry");
+                    Text.fontSize(18);
+                    Text.fontWeight(FontWeight.Bolder);
+                    Text.fontColor(this.isSameDay(day, ObservedObject.GetRawObject(this.selectedDate)) ? SciFiTheme.textMain : SciFiTheme.textMain);
+                }, Text);
+                Text.pop();
+                Column.pop();
+            };
+            this.forEachUpdateFunction(elmtId, this.daysInWeek, forEachItemGenFunction);
+        }, ForEach);
+        ForEach.pop();
+        Row.pop();
+        // Apple Calendar Scroll View
+        Scroll.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
             // Filtered Task UI
-            if (this.tasks.length === 0) {
+            if (this.filteredTasks.length === 0) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
-                        Column.debugLine("entry/src/main/ets/pages/Index.ets(70:9)", "entry");
+                        Column.debugLine("entry/src/main/ets/pages/Index.ets(141:11)", "entry");
                         Column.justifyContent(FlexAlign.Center);
                         Column.layoutWeight(1);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create(this.isKawaii ? "No Magical Tasks Today! ğŸ¹âœ¨" : "AWAITING_NEURAL_LINK...");
-                        Text.debugLine("entry/src/main/ets/pages/Index.ets(71:11)", "entry");
+                        Text.debugLine("entry/src/main/ets/pages/Index.ets(142:13)", "entry");
                         Text.fontSize(16);
+                        Text.fontWeight(FontWeight.Bold);
                         Text.fontColor(SciFiTheme.textSecondary);
                     }, Text);
                     Text.pop();
@@ -207,14 +335,14 @@ class Index extends ViewPU {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         List.create({ space: 10 });
-                        List.debugLine("entry/src/main/ets/pages/Index.ets(76:9)", "entry");
+                        List.debugLine("entry/src/main/ets/pages/Index.ets(150:11)", "entry");
                         List.padding({ left: 20, right: 20 });
                         List.layoutWeight(1);
                     }, List);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         ForEach.create();
                         const forEachItemGenFunction = _item => {
-                            const item = _item;
+                            const task = _item;
                             {
                                 const itemCreation = (elmtId, isInitialRender) => {
                                     ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
@@ -226,83 +354,36 @@ class Index extends ViewPU {
                                 };
                                 const itemCreation2 = (elmtId, isInitialRender) => {
                                     ListItem.create(deepRenderFunction, true);
-                                    ListItem.debugLine("entry/src/main/ets/pages/Index.ets(78:13)", "entry");
+                                    ListItem.debugLine("entry/src/main/ets/pages/Index.ets(152:15)", "entry");
                                 };
                                 const deepRenderFunction = (elmtId, isInitialRender) => {
                                     itemCreation(elmtId, isInitialRender);
-                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                        Row.create();
-                                        Row.debugLine("entry/src/main/ets/pages/Index.ets(79:15)", "entry");
-                                        Row.width('100%');
-                                        Row.padding(15);
-                                        Row.backgroundColor(SciFiTheme.panelBackground);
-                                        Row.borderRadius(10);
-                                    }, Row);
-                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                        Column.create();
-                                        Column.debugLine("entry/src/main/ets/pages/Index.ets(80:17)", "entry");
-                                        Column.alignItems(HorizontalAlign.Start);
-                                    }, Column);
-                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                        Text.create(item.title);
-                                        Text.debugLine("entry/src/main/ets/pages/Index.ets(81:19)", "entry");
-                                        Text.fontSize(18);
-                                        Text.fontWeight(FontWeight.Bold);
-                                        Text.fontColor(item.completed ? SciFiTheme.textSecondary : SciFiTheme.textMain);
-                                        Text.decoration({ type: item.completed ? TextDecorationType.LineThrough : TextDecorationType.None });
-                                    }, Text);
-                                    Text.pop();
-                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                        If.create();
-                                        if (item.details) {
-                                            this.ifElseBranchUpdateFunction(0, () => {
-                                                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                                    Text.create(item.details);
-                                                    Text.debugLine("entry/src/main/ets/pages/Index.ets(87:21)", "entry");
-                                                    Text.fontSize(12);
-                                                    Text.fontColor(SciFiTheme.neonCyan);
-                                                }, Text);
-                                                Text.pop();
-                                            });
-                                        }
-                                        else {
-                                            this.ifElseBranchUpdateFunction(1, () => {
-                                            });
-                                        }
-                                    }, If);
-                                    If.pop();
-                                    Column.pop();
-                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                        Blank.create();
-                                        Blank.debugLine("entry/src/main/ets/pages/Index.ets(93:17)", "entry");
-                                    }, Blank);
-                                    Blank.pop();
-                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                        Button.createWithChild({ type: ButtonType.Circle });
-                                        Button.debugLine("entry/src/main/ets/pages/Index.ets(95:17)", "entry");
-                                        Button.backgroundColor(Color.Transparent);
-                                        Button.onClick(() => {
-                                            item.completed = !item.completed;
-                                            // Trigger UI update
-                                            this.tasks = [...this.tasks];
-                                        });
-                                    }, Button);
-                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                        Text.create(item.completed ? "âœ“" : "â—‹");
-                                        Text.debugLine("entry/src/main/ets/pages/Index.ets(96:19)", "entry");
-                                        Text.fontSize(20);
-                                        Text.fontColor(item.completed ? SciFiTheme.neonGreen : SciFiTheme.neonCyan);
-                                    }, Text);
-                                    Text.pop();
-                                    Button.pop();
-                                    Row.pop();
+                                    {
+                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                            if (isInitialRender) {
+                                                let componentCall = new TaskRowView(this, { task: task }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/Index.ets", line: 153, col: 17 });
+                                                ViewPU.create(componentCall);
+                                                let paramsLambda = () => {
+                                                    return {
+                                                        task: task
+                                                    };
+                                                };
+                                                componentCall.paramsGenerator_ = paramsLambda;
+                                            }
+                                            else {
+                                                this.updateStateVarsOfChildByElmtId(elmtId, {
+                                                    task: task
+                                                });
+                                            }
+                                        }, { name: "TaskRowView" });
+                                    }
                                     ListItem.pop();
                                 };
                                 this.observeComponentCreation2(itemCreation2, ListItem);
                                 ListItem.pop();
                             }
                         };
-                        this.forEachUpdateFunction(elmtId, this.tasks, forEachItemGenFunction);
+                        this.forEachUpdateFunction(elmtId, this.filteredTasks, forEachItemGenFunction);
                     }, ForEach);
                     ForEach.pop();
                     List.pop();
@@ -311,6 +392,12 @@ class Index extends ViewPU {
         }, If);
         If.pop();
         Column.pop();
+        Stack.pop();
+    }
+    isSameDay(d1, d2) {
+        return d1.getFullYear() === d2.getFullYear() &&
+            d1.getMonth() === d2.getMonth() &&
+            d1.getDate() === d2.getDate();
     }
     rerender() {
         this.updateDirtyElements();
@@ -319,169 +406,893 @@ class Index extends ViewPU {
         return "Index";
     }
 }
+class CuteDashboardChart extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__appThemeStr = this.createStorageLink('app_theme', 'scifi', "appThemeStr");
+        this.__tasks = new SynchedPropertyObjectOneWayPU(params.tasks, this, "tasks");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+    }
+    updateStateVars(params) {
+        this.__tasks.reset(params.tasks);
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__appThemeStr.purgeDependencyOnElmtId(rmElmtId);
+        this.__tasks.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__appThemeStr.aboutToBeDeleted();
+        this.__tasks.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get appThemeStr() {
+        return this.__appThemeStr.get();
+    }
+    set appThemeStr(newValue) {
+        this.__appThemeStr.set(newValue);
+    }
+    get tasks() {
+        return this.__tasks.get();
+    }
+    set tasks(newValue) {
+        this.__tasks.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(181:5)", "entry");
+            Column.padding(15);
+            Column.backgroundColor(SciFiTheme.panelBackground);
+            Column.borderRadius(15);
+            Column.margin({ left: 20, right: 20 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isKawaii ? "Magical Progress ğŸŒ¸" : "SYSTEM_DIAGNOSTICS");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(182:7)", "entry");
+            Text.fontSize(14);
+            Text.fontColor(SciFiTheme.neonMagenta);
+            Text.margin({ bottom: 10 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(187:7)", "entry");
+            Row.width('100%');
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(188:9)", "entry");
+            Column.alignItems(HorizontalAlign.Start);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isKawaii ? "Finished! âœ¨" : "DATA_RESOLVED");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(189:11)", "entry");
+            Text.fontSize(12);
+            Text.fontColor(SciFiTheme.textSecondary);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Rect.create();
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(192:11)", "entry");
+            Rect.width(Math.max(10, this.completedCount * 30) + 'px');
+            Rect.height(20);
+            Rect.fill(SciFiTheme.neonGreen);
+            Rect.borderRadius(5);
+        }, Rect);
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.debugLine("entry/src/main/ets/pages/Index.ets(195:9)", "entry");
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(197:9)", "entry");
+            Column.alignItems(HorizontalAlign.End);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isKawaii ? "To Do ğŸ°" : "PENDING_OPS");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(198:11)", "entry");
+            Text.fontSize(12);
+            Text.fontColor(SciFiTheme.textSecondary);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Rect.create();
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(201:11)", "entry");
+            Rect.width(Math.max(10, this.pendingCount * 30) + 'px');
+            Rect.height(20);
+            Rect.fill(SciFiTheme.neonCyan);
+            Rect.borderRadius(5);
+        }, Rect);
+        Column.pop();
+        Row.pop();
+        Column.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+class TaskRowView extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__appThemeStr = this.createStorageLink('app_theme', 'scifi', "appThemeStr");
+        this.__task = new SynchedPropertyNesedObjectPU(params.task, this, "task");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        this.__task.set(params.task);
+    }
+    updateStateVars(params) {
+        this.__task.set(params.task);
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__appThemeStr.purgeDependencyOnElmtId(rmElmtId);
+        this.__task.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__appThemeStr.aboutToBeDeleted();
+        this.__task.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get appThemeStr() {
+        return this.__appThemeStr.get();
+    }
+    set appThemeStr(newValue) {
+        this.__appThemeStr.set(newValue);
+    }
+    get task() {
+        return this.__task.get();
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(221:5)", "entry");
+            Row.padding(15);
+            Row.backgroundColor(SciFiTheme.panelBackground);
+            Row.borderRadius(15);
+            Row.width('100%');
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create({ space: 6 });
+            Column.debugLine("entry/src/main/ets/pages/Index.ets(222:7)", "entry");
+            Column.alignItems(HorizontalAlign.Start);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(223:9)", "entry");
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.task.isMLGenerated) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.isKawaii ? "ğŸª„ " : "âš¡ ");
+                        Text.debugLine("entry/src/main/ets/pages/Index.ets(225:13)", "entry");
+                        Text.fontColor(SciFiTheme.neonMagenta);
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.task.title);
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(228:11)", "entry");
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(this.task.completed ? SciFiTheme.textSecondary : SciFiTheme.textMain);
+            Text.decoration({ type: this.task.completed ? TextDecorationType.LineThrough : TextDecorationType.None });
+        }, Text);
+        Text.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.task.details) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.task.details);
+                        Text.debugLine("entry/src/main/ets/pages/Index.ets(236:11)", "entry");
+                        Text.fontSize(10);
+                        Text.fontColor(SciFiTheme.neonCyan);
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.debugLine("entry/src/main/ets/pages/Index.ets(241:9)", "entry");
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create("ğŸ•’ ");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(242:11)", "entry");
+            Text.fontColor(SciFiTheme.neonMagenta);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.task.dueDate.toLocaleTimeString());
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(244:11)", "entry");
+            Text.fontSize(10);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(SciFiTheme.textSecondary);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.debugLine("entry/src/main/ets/pages/Index.ets(252:7)", "entry");
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithChild({ type: ButtonType.Circle });
+            Button.debugLine("entry/src/main/ets/pages/Index.ets(254:7)", "entry");
+            Button.backgroundColor(Color.Transparent);
+            Button.onClick(() => {
+                this.task.completed = !this.task.completed;
+            });
+        }, Button);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.task.completed ? (this.isKawaii ? "âœ“" : "â¬¢") : (this.isKawaii ? "â—‹" : "â¬¡"));
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(255:9)", "entry");
+            Text.fontSize(24);
+            Text.fontColor(this.task.completed ? SciFiTheme.neonGreen : SciFiTheme.neonCyan);
+        }, Text);
+        Text.pop();
+        Button.pop();
+        Row.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+class FloatingAnimalsOverlay extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__yOffset = new ObservedPropertySimplePU(0, this, "yOffset");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.yOffset !== undefined) {
+            this.yOffset = params.yOffset;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__yOffset.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__yOffset.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get yOffset() {
+        return this.__yOffset.get();
+    }
+    set yOffset(newValue) {
+        this.__yOffset.set(newValue);
+    }
+    aboutToAppear() {
+        setInterval(() => {
+            this.yOffset = this.yOffset === 0 ? -20 : 0;
+        }, 2000);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create();
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(282:5)", "entry");
+            globalThis.Context.animation({ duration: 2000 });
+            Stack.width('100%');
+            Stack.height('100%');
+            globalThis.Context.animation(null);
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create("ğŸ¦„");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(283:7)", "entry");
+            Text.fontSize(60);
+            Text.position({ x: '20%', y: '20%' });
+            Text.opacity(0.3);
+            Text.translate({ y: this.yOffset });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create("ğŸ¼");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(284:7)", "entry");
+            Text.fontSize(50);
+            Text.position({ x: '70%', y: '40%' });
+            Text.opacity(0.3);
+            Text.translate({ y: -this.yOffset });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create("ğŸ€");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(285:7)", "entry");
+            Text.fontSize(70);
+            Text.position({ x: '40%', y: '70%' });
+            Text.opacity(0.2);
+            Text.translate({ y: this.yOffset });
+        }, Text);
+        Text.pop();
+        Stack.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+class FloatingBotsOverlay extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__yOffset = new ObservedPropertySimplePU(0, this, "yOffset");
+        this.__scanlineY = new ObservedPropertySimplePU(-200, this, "scanlineY");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.yOffset !== undefined) {
+            this.yOffset = params.yOffset;
+        }
+        if (params.scanlineY !== undefined) {
+            this.scanlineY = params.scanlineY;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__yOffset.purgeDependencyOnElmtId(rmElmtId);
+        this.__scanlineY.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__yOffset.aboutToBeDeleted();
+        this.__scanlineY.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get yOffset() {
+        return this.__yOffset.get();
+    }
+    set yOffset(newValue) {
+        this.__yOffset.set(newValue);
+    }
+    get scanlineY() {
+        return this.__scanlineY.get();
+    }
+    set scanlineY(newValue) {
+        this.__scanlineY.set(newValue);
+    }
+    aboutToAppear() {
+        setInterval(() => {
+            this.yOffset = this.yOffset === 0 ? -20 : 0;
+        }, 2000);
+        setInterval(() => {
+            this.scanlineY = this.scanlineY > 800 ? -200 : this.scanlineY + 5;
+        }, 50);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create();
+            Stack.debugLine("entry/src/main/ets/pages/Index.ets(305:5)", "entry");
+            globalThis.Context.animation({ duration: 2000 });
+            Stack.width('100%');
+            Stack.height('100%');
+            globalThis.Context.animation(null);
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create("ğŸ‘¾");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(306:7)", "entry");
+            Text.fontSize(60);
+            Text.position({ x: '10%', y: '15%' });
+            Text.opacity(0.3);
+            Text.translate({ y: this.yOffset });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create("ğŸ¤–");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(307:7)", "entry");
+            Text.fontSize(50);
+            Text.position({ x: '80%', y: '30%' });
+            Text.opacity(0.3);
+            Text.translate({ y: -this.yOffset });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create("ğŸ›¸");
+            Text.debugLine("entry/src/main/ets/pages/Index.ets(308:7)", "entry");
+            Text.fontSize(70);
+            Text.position({ x: '50%', y: '80%' });
+            Text.opacity(0.2);
+            Text.translate({ y: this.yOffset });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Rect.create();
+            Rect.debugLine("entry/src/main/ets/pages/Index.ets(310:7)", "entry");
+            Rect.width('100%');
+            Rect.height(60);
+            Rect.fill(SciFiTheme.neonCyan);
+            Rect.opacity(0.2);
+            Rect.position({ y: this.scanlineY });
+        }, Rect);
+        Stack.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
 registerNamedRoute(() => new Index(undefined, {}), "", { bundleName: "com.scifi.todos", moduleName: "entry", pagePath: "pages/Index", pageFullPath: "entry/src/main/ets/pages/Index", integratedHsp: "false", moduleType: "followWithHap" });
-//# sourceMappingURL=Index.js.mapÂ’ÙW/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/models/TaskDataModel.etsÙS/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/theme/SciFiTheme.etsÙN/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/pages/Index.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙ1/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entryÙ+/Users/aayushkumar/Desktop/HarmonyOSToDoApp¥entry¥1.0.0Ô  Ù1/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entryÃÃÚ[import { TaskDataModel } from '../models/TaskDataModel';
+//# sourceMappingURL=Index.js.mapÂ’ÙW/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/models/TaskDataModel.etsÙS/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/theme/SciFiTheme.etsÙN/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/pages/Index.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙ1/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entryÙ+/Users/aayushkumar/Desktop/HarmonyOSToDoApp¥entry¥1.0.0Ô  Ù1/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entryÃÃÚ(Ñimport { TaskDataModel } from '../models/TaskDataModel';
 import { SciFiTheme } from '../theme/SciFiTheme';
 
 @Entry
 @Component
 struct Index {
-  @State isKawaii: boolean = false;
+  @StorageLink('app_theme') appThemeStr: string = 'scifi';
   @State tasks: TaskDataModel[] = [];
   @State selectedDate: Date = new Date();
+  
+  get isKawaii(): boolean {
+    return this.appThemeStr === 'kawaii';
+  }
+
+  get daysInWeek(): Date[] {
+    let days: Date[] = [];
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+    for (let i = 0; i < 14; i++) {
+      let d = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
+      days.push(d);
+    }
+    return days;
+  }
+
+  get filteredTasks(): TaskDataModel[] {
+    return this.tasks.filter(t => {
+      let tD = new Date(t.dueDate);
+      return tD.getFullYear() === this.selectedDate.getFullYear() &&
+             tD.getMonth() === this.selectedDate.getMonth() &&
+             tD.getDate() === this.selectedDate.getDate();
+    });
+  }
+
+  build() {
+    Stack() {
+      // Background
+      Rect()
+        .width('100%').height('100%')
+        .fill(this.isKawaii ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace)
+      
+      // Floating Overlay
+      if (this.isKawaii) {
+        FloatingAnimalsOverlay()
+      } else {
+        FloatingBotsOverlay()
+      }
+
+      Column({ space: 20 }) {
+        // Header Bar
+        Row() {
+          Column() {
+            Text(this.isKawaii ? "Magic Checklist ğŸ€" : "SYS.TODOS: ONNX")
+              .fontSize(24)
+              .fontWeight(FontWeight.Bold)
+              .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
+            Text(this.isKawaii ? "Cute Magical Scanner ğŸ°âœ¨" : "DATA_STREAM_ACTIVE")
+              .fontSize(14)
+              .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
+          }
+          .alignItems(HorizontalAlign.Start)
+
+          Blank()
+
+          Row({ space: 12 }) {
+            // Theme Switcher Toggle
+            Button({ type: ButtonType.Circle }) {
+              Text(this.isKawaii ? "âœ¨" : "â¬¡")
+                .fontSize(20)
+                .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
+            }
+            .backgroundColor(SciFiTheme.panelBackground)
+            .width(40).height(40)
+            .onClick(() => {
+              this.appThemeStr = this.isKawaii ? 'scifi' : 'kawaii';
+            })
+
+            // Add Button
+            Button({ type: ButtonType.Circle }) {
+              Text("+")
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .fontColor(this.isKawaii ? Color.White : SciFiTheme.neonCyan)
+            }
+            .backgroundColor(this.isKawaii ? SciFiTheme.neonCyan : '#2600FFFF')
+            .width(40).height(40)
+            .onClick(() => {
+              let newTask = new TaskDataModel("New Manual Task", "MANUAL_INJECT", false, this.selectedDate);
+              this.tasks.push(newTask);
+            })
+
+            // Scanner Button
+            Button({ type: ButtonType.Circle }) {
+              Text("ğŸ“·")
+                .fontSize(20)
+            }
+            .backgroundColor(this.isKawaii ? SciFiTheme.neonMagenta : '#26FF00FF')
+            .width(40).height(40)
+            .border({ width: this.isKawaii ? 0 : 1.5, color: SciFiTheme.neonMagenta })
+            .onClick(() => {
+              let newTask = new TaskDataModel("Scanned Bill", "EXTRACT_SUCCESS", true, this.selectedDate);
+              this.tasks.push(newTask);
+            })
+          }
+        }
+        .width('100%')
+        .padding({ left: 20, right: 20, top: 40 })
+
+        // Dashboard Charts
+        CuteDashboardChart({ tasks: this.tasks })
+
+        // Apple Calendar Scroll View
+        Scroll() {
+          Row({ space: 15 }) {
+            ForEach(this.daysInWeek, (day: Date) => {
+              Column() {
+                Text(day.toString().substring(0,3))
+                  .fontSize(12)
+                  .fontWeight(FontWeight.Bold)
+                  .fontColor(this.isSameDay(day, this.selectedDate) ? SciFiTheme.textMain : SciFiTheme.textSecondary)
+                Text(day.getDate().toString())
+                  .fontSize(18)
+                  .fontWeight(FontWeight.Bolder)
+                  .fontColor(this.isSameDay(day, this.selectedDate) ? SciFiTheme.textMain : SciFiTheme.textMain)
+              }
+              .padding({ top: 12, bottom: 12, left: 16, right: 16 })
+              .backgroundColor(this.isSameDay(day, this.selectedDate) ? SciFiTheme.neonMagenta : '#990B132B')
+              .borderRadius(20)
+              .onClick(() => {
+                this.selectedDate = day;
+              })
+            })
+          }
+          .padding({ left: 20, right: 20 })
+        }
+        .scrollable(ScrollDirection.Horizontal)
+        .scrollBar(BarState.Off)
+
+        // Filtered Task UI
+        if (this.filteredTasks.length === 0) {
+          Column() {
+            Text(this.isKawaii ? "No Magical Tasks Today! ğŸ¹âœ¨" : "AWAITING_NEURAL_LINK...")
+              .fontSize(16)
+              .fontWeight(FontWeight.Bold)
+              .fontColor(SciFiTheme.textSecondary)
+          }
+          .justifyContent(FlexAlign.Center)
+          .layoutWeight(1)
+        } else {
+          List({ space: 10 }) {
+            ForEach(this.filteredTasks, (task: TaskDataModel) => {
+              ListItem() {
+                TaskRowView({ task: task })
+              }
+            })
+          }
+          .padding({ left: 20, right: 20 })
+          .layoutWeight(1)
+        }
+      }
+    }
+  }
+
+  isSameDay(d1: Date, d2: Date): boolean {
+    return d1.getFullYear() === d2.getFullYear() &&
+           d1.getMonth() === d2.getMonth() &&
+           d1.getDate() === d2.getDate();
+  }
+}
+
+@Component
+struct CuteDashboardChart {
+  @StorageLink('app_theme') appThemeStr: string = 'scifi';
+  @Prop tasks: TaskDataModel[];
+  
+  get isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
+  get completedCount(): number { return this.tasks.filter(t => t.completed).length; }
+  get pendingCount(): number { return this.tasks.filter(t => !t.completed).length; }
 
   build() {
     Column() {
-      // Header
+      Text(this.isKawaii ? "Magical Progress ğŸŒ¸" : "SYSTEM_DIAGNOSTICS")
+        .fontSize(14)
+        .fontColor(SciFiTheme.neonMagenta)
+        .margin({ bottom: 10 })
+      
       Row() {
         Column() {
-          Text(this.isKawaii ? "Magic Checklist ğŸ€" : "SYS.TODOS: ONNX")
-            .fontSize(24)
-            .fontWeight(FontWeight.Bold)
-            .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
-          Text(this.isKawaii ? "Cute Magical Scanner ğŸ°âœ¨" : "DATA_STREAM_ACTIVE")
-            .fontSize(14)
-            .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
+          Text(this.isKawaii ? "Finished! âœ¨" : "DATA_RESOLVED")
+            .fontSize(12)
+            .fontColor(SciFiTheme.textSecondary)
+          Rect().width(Math.max(10, this.completedCount * 30) + 'px').height(20).fill(SciFiTheme.neonGreen).borderRadius(5)
         }.alignItems(HorizontalAlign.Start)
         
         Blank()
         
-        // Theme Toggle
-        Button({ type: ButtonType.Circle }) {
-          Text(this.isKawaii ? "âœ¨" : "â¬¡")
-            .fontSize(20)
-            .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
-        }
-        .backgroundColor(SciFiTheme.panelBackground)
-        .onClick(() => {
-          this.isKawaii = !this.isKawaii;
-        })
-        .width(40).height(40).margin({ right: 10 })
-
-        // Add Button
-        Button({ type: ButtonType.Circle }) {
-          Text("+")
-            .fontSize(24)
-            .fontColor(Color.White)
-        }
-        .backgroundColor(this.isKawaii ? SciFiTheme.neonCyan : '#2200FFFF')
-        .onClick(() => {
-          // Manual add logic
-          let newTask = new TaskDataModel("New Manual Task", "MANUAL_INJECT", false, new Date());
-          this.tasks.push(newTask);
-        })
-        .width(40).height(40).margin({ right: 10 })
-
-        // Scanner Button
-        Button({ type: ButtonType.Circle }) {
-          Text("ğŸ“·")
-            .fontSize(20)
-        }
-        .backgroundColor(this.isKawaii ? SciFiTheme.neonMagenta : '#22FF00FF')
-        .onClick(() => {
-          // Scanner UI logic
-          let newTask = new TaskDataModel("Scanned Bill", "EXTRACT_SUCCESS", true, new Date());
-          this.tasks.push(newTask);
-        })
-        .width(40).height(40)
-
-      }.width('100%').padding(20)
-
-      // Filtered Task UI
-      if (this.tasks.length === 0) {
         Column() {
-          Text(this.isKawaii ? "No Magical Tasks Today! ğŸ¹âœ¨" : "AWAITING_NEURAL_LINK...")
-            .fontSize(16)
+          Text(this.isKawaii ? "To Do ğŸ°" : "PENDING_OPS")
+            .fontSize(12)
             .fontColor(SciFiTheme.textSecondary)
-        }.justifyContent(FlexAlign.Center).layoutWeight(1)
-      } else {
-        List({ space: 10 }) {
-          ForEach(this.tasks, (item: TaskDataModel) => {
-            ListItem() {
-              Row() {
-                Column() {
-                  Text(item.title)
-                    .fontSize(18)
-                    .fontWeight(FontWeight.Bold)
-                    .fontColor(item.completed ? SciFiTheme.textSecondary : SciFiTheme.textMain)
-                    .decoration({ type: item.completed ? TextDecorationType.LineThrough : TextDecorationType.None })
-                  if (item.details) {
-                    Text(item.details)
-                      .fontSize(12)
-                      .fontColor(SciFiTheme.neonCyan)
-                  }
-                }.alignItems(HorizontalAlign.Start)
-                
-                Blank()
-                
-                Button({ type: ButtonType.Circle }) {
-                  Text(item.completed ? "âœ“" : "â—‹")
-                    .fontSize(20)
-                    .fontColor(item.completed ? SciFiTheme.neonGreen : SciFiTheme.neonCyan)
-                }.backgroundColor(Color.Transparent).onClick(() => {
-                  item.completed = !item.completed;
-                  // Trigger UI update
-                  this.tasks = [...this.tasks];
-                })
-              }
-              .width('100%')
-              .padding(15)
-              .backgroundColor(SciFiTheme.panelBackground)
-              .borderRadius(10)
-            }
-          })
-        }.padding({ left: 20, right: 20 }).layoutWeight(1)
+          Rect().width(Math.max(10, this.pendingCount * 30) + 'px').height(20).fill(SciFiTheme.neonCyan).borderRadius(5)
+        }.alignItems(HorizontalAlign.End)
       }
+      .width('100%')
     }
-    .width('100%')
-    .height('100%')
-    .backgroundColor(this.isKawaii ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace)
+    .padding(15)
+    .backgroundColor(SciFiTheme.panelBackground)
+    .borderRadius(15)
+    .margin({ left: 20, right: 20 })
   }
 }
-ÀÔrC’·../models/TaskDataModel³../theme/SciFiThemeÔrD—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙW/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/models/TaskDataModel.etsAÃªoh-resolveÂDAÂÙS/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/theme/SciFiTheme.etsAÃªoh-resolveÂ“ÔrE–§version¤fileªsourceRoot§sources¥names¨mappings¨Index.js ‘©Index.etsÜ:˜”    ”  ”	  	”  ”  ”  ”7  7”8  8˜”   ” ”	 	” ” ” ”0 0”1 1’” ” ‘”  ’”7 ”< "’”4 "”6 $””; ”? "”ÌC &”ÌE (‘” 1’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ‘” 
-’” ” 
-–” ” 
-” Ìq” Ìq
-” Ìq” Ìq–” ” 
-” Ìr” Ìr” Ìr”  ÌrÜ ” ” 
-” Ìs”" Ìs”# Ìs”' Ìs”( Ìs”0 Ìs"”1 Ìs#”2 Ìs$”3 Ìs%”= Ìs/”> Ìs0”ÌF Ìs8”ÌG Ìs9”ÌH Ìs:”ÌI Ìs;”ÌS ÌsÌE”ÌT ÌsÌF”Ì_ ÌsÌQ’” ” ’” ” 	’” ” –” ” 	” ÌA” ÌA” ÌA” ÌA’” ” –” ” 	” ÌA” ÌA” ÌA” ÌA ’” ” ˜” ” ” 
-” ” ”- $”. %”3 *” 
-” ” ” ” ”% ”& ”' ”( ”< 3”= 4”> 5”? 6”ÌP ÌG–” 
-” ” ” ” ” ˜” 
-” ” ” ” ”& "”' #”+ 'Ü ” 
-” ” ” ” ” ”  ”( $”) %”* &”+ '”5 1”6 2”Ì@ <”ÌA =”ÌB >”ÌC ?”ÌM ÌI”ÌN ÌJ”ÌY ÌU’” 
-” ” 
-” ” ” ” ”% ”& ”' ”( ”ÌB 9”ÌC :”ÌD ;”ÌE <”ÌY ÌP–” 
-” ” ” ” ” Ü ” 
-” ” ” ” ” ”  ”( $”) %”* &”+ '”5 1”6 2”Ì@ <”ÌA =”ÌB >”ÌC ?”ÌM ÌI”ÌN ÌJ”ÌV ÌR’” 
-” ’” ” ’” ” ’” ” ’” ” š” ” ”# ”% ”) ”+ ”5 !”6 "”< (”> *’” ” ˜” ” ”  	”"  ”#  ”-  #”.  $”=  3’” ” —” ” ” !	” !” !” !”  !š” "
-” "” "” "”  "”! "”% "”& " ”. "(”/ ")’” #” #	’” ” –” ” ” $	” $” $” $’” ” –” ” ” $” $” $” $’” ” š” ” ” $” $$” $%” $'”! $,”# $.”% $0”' $2” 
-” ” ” ” ”% ”& ”' ”( ”+ "”, #”- $”. %”1 (–” 
-” ” ” ” ” Ü ” 
-” ” ” ” ” ”  ”( $”) %”* &”+ '”5 1”6 2”Ì@ <”ÌA =”ÌB >”ÌC ?”ÌM ÌI”ÌN ÌJ”ÌV ÌR’” 
-” ’” ” ’” ” ’” &” &š” '” '”# '”% '”) '”+ '”5 '!”6 '"”< '(”> '*’” &” &Ü ” '” '” ,	”" ,”# ,”' ,”( ,”0 ,&”1 ,'”2 ,(”3 ,)”= ,3”> ,4”ÌF ,<”ÌG ,=”ÌH ,>”ÌI ,?”ÌT ,ÌJ’” &” &—” '” '” -	” -” -” -”  -’” .
-”# .Ü ” /
-” /” /” /”" /”/ /)”0 /*”ÌA /;”ÌC /=”ÌR /ÌL”ÌT /ÌN”ÌY /ÌS”Ì[ /ÌU”Ì_ /ÌY”Ìc /Ì]”Ìe /Ì_”Ìf /Ì`”Ìg /Ìaš” 0
-” 0” 0” 0” 0” 0”  0”' 0!”( 0"”) 0#’” 1” 1	’” &” &–” '” '” 2	” 2” 2” 2’” &” &–” '” '” 2” 2” 2” 2’” &” &š” '” '” 2” 2$” 2%” 2'”! 2,”# 2.”% 20”' 22”” (
-” (” (” (–” (
-” (” )” )” )” )˜” (
-” (” *” *” *”  *”! *”& *"’” (
-” (’” &” &’” '” '’” 4” 4š” 5” 5”# 5”% 5”) 5”+ 5”5 5!”6 5"”< 5(”> 5*’” 4” 4Ü ” 5” 5” 9	”" 9”# 9”' 9”( 9”0 9&”1 9'”2 9(”3 9)”= 93”> 94”ÌI 9?”ÌJ 9Ì@”ÌK 9ÌA”ÌL 9ÌB”ÌW 9ÌM’” 4” 4—” 5” 5” :	” :” :” :”  :’” ;
-”# ;Ü ” <
-” <” <” <”" <”/ <)”0 <*”> <8”Ì@ <:”ÌQ <ÌK”ÌS <ÌM”ÌW <ÌQ”ÌY <ÌS”Ì] <ÌW”Ìa <Ì[”Ìc <Ì]”Ìd <Ì^”Ìe <Ì_š” =
-” =” =” =” =” =”  =”' =!”( ="”) =#’” >” >	’” 4” 4–” 5” 5” ?	” ?” ?” ?’” 4” 4–” 5” 5” ?” ?” ?” ?”” 6
-” 6” 6” 6–” 6
-” 6” 7” 7” 7” 7’” 6
-” 6’” 4” 4’” 5” 5’” ” ’” ” 	’” ÌC” ÌCš” ÌD” ÌD
-” ÌD” ÌD” ÌD” ÌD”! ÌD”& ÌD ”' ÌD!”) ÌD#’” ÌE” ÌE˜” ÌE” ÌE” ÌI
-”- ÌI”. ÌI”7 ÌI"”8 ÌI#”> ÌI)–” ÌE” ÌE” ÌI+”+ ÌI7”, ÌI8”- ÌI9” ÌF
-” ÌF”$ ÌF”( ÌF”) ÌF”1 ÌF”2 ÌF”3 ÌF”4 ÌF”ÌQ ÌF<”ÌR ÌF=”ÌS ÌF>”ÌT ÌF?”Ìm ÌFÌX–” ÌF
-” ÌF” ÌG”% ÌG”& ÌG”( ÌG˜” ÌF
-” ÌF” ÌH”& ÌH”' ÌH”1 ÌH!”2 ÌH"”? ÌH/’” ÌF
-” ÌF’” ÌE” ÌE‘” ÌJ‘” ÌJ˜” ÌK” ÌK”$ ÌK”& ÌK”+ ÌK”- ÌK”/ ÌK”1 ÌK” ÌK” ÌK” Ìn
-”$ Ìn”% Ìn”' Ìn”+ Ìn”- Ìn”/ Ìn”1 Ìn”6 Ìn#”8 Ìn%”: Ìn'”< Ìn)–” ÌK” ÌK” Ìn+”) Ìn7”* Ìn8”+ Ìn9’” ÌL
-” ÌL’”( ÌM”0 ÌM’”( ÌN”+ ÌN–”( ÌN”+ ÌN”, Ìh”1 Ìh”2 Ìh”8 Ìh–”( ÌN”+ ÌN”, Ìi”3 Ìi”4 Ìi”6 Ìi˜”( ÌN”+ ÌN”, Ìj”; Ìj”< Ìj”ÌF Ìj)”ÌG Ìj*”ÌV Ìj9–”( ÌN”+ ÌN”, Ìk”8 Ìk”9 Ìk”; Ìk’”( ÌO”. ÌO˜”( ÌO”. ÌO”/ ÌZ”9 ÌZ”: ÌZ”ÌI ÌZ,”ÌJ ÌZ-”ÌO ÌZ2–”( ÌP”, ÌP”4 ÌP”8 ÌP”9 ÌP”> ÌP!–”( ÌP”, ÌP”- ÌQ”5 ÌQ”6 ÌQ”8 ÌQ ˜”( ÌP”, ÌP”- ÌR”7 ÌR”8 ÌR ”ÌB ÌR*”ÌC ÌR+”ÌG ÌR/Ü ”( ÌP”, ÌP”- ÌS”6 ÌS”7 ÌS”; ÌS#”< ÌS$”ÌE ÌS-”ÌF ÌS.”ÌG ÌS/”ÌH ÌS0”ÌR ÌS:”ÌS ÌS;”Ì` ÌSÌH”Ìa ÌSÌI”Ìb ÌSÌJ”Ìc ÌSÌK”Ìm ÌSÌU”Ìn ÌSÌV”Ìv ÌSÌ^Ü ”( ÌP”, ÌP”- ÌT”7 ÌT”8 ÌT ”: ÌT"”> ÌT&”Ì@ ÌT(”ÌD ÌT,”ÌE ÌT-”ÌN ÌT6”ÌO ÌT7”ÌP ÌT8”ÌQ ÌT9”Ìc ÌTÌK”Ìd ÌTÌL”Ìo ÌTÌW”Ìp ÌTÌX”Ìq ÌTÌY”Ìr ÌTÌZ”Ì„ ÌTÌl”Ì… ÌTÌm”Ì‰ ÌTÌq”Ì‹ ÌTÌs’”$ ÌP”( ÌP–”( ÌU”, ÌU”0 ÌU”1 ÌU”8 ÌU"”: ÌU$–”4 ÌV”8 ÌV”Ì@ ÌV”ÌD ÌV”ÌE ÌV”ÌL ÌV%–”4 ÌV”8 ÌV”9 ÌW”ÌA ÌW”ÌB ÌW ”ÌD ÌW"˜”4 ÌV”8 ÌV”9 ÌX”ÌB ÌX ”ÌC ÌX!”ÌM ÌX+”ÌN ÌX,”ÌV ÌX4’”0 ÌV”4 ÌV‘”) ÌY‘”) ÌY’”$ ÌO”* ÌO’”( Ì\”- Ì\’”$ Ì\”) Ì\š”( Ì^”. Ì^”? Ì^”ÌA Ì^”ÌE Ì^”ÌG Ì^”ÌQ Ì^)”ÌR Ì^*”ÌX Ì^0”ÌZ Ì^2˜”( Ì^”. Ì^”/ Ìb”> Ìb!”? Ìb"”ÌD Ìb'”ÌE Ìb(”ÌP Ìb3—”( Ì^”. Ì^”/ Ìb5”6 Ìb<”7 Ìb=”: ÌbÌ@”< ÌbÌBš”, Ìc”0 Ìc”1 Ìc”: Ìc ”= Ìc#”> Ìc$”ÌB Ìc(”ÌC Ìc)”ÌL Ìc2”ÌM Ìc3’”, Ìd”Ì@ Ìd&œ”, Ìe”0 Ìe”1 Ìe”6 Ìe”9 Ìe”: Ìe ”= Ìe#”ÌA Ìe'”ÌB Ìe(”ÌG Ìe-”ÌH Ìe.”ÌI Ìe/’”( Ìf”) Ìf”( Ì_”, Ì_”4 Ì_”8 Ì_”9 Ì_”ÌB Ì_%”ÌC Ì_&”ÌD Ì_'”ÌE Ì_(”ÌH Ì_+”ÌI Ì_,”ÌJ Ì_-”ÌK Ì_.”ÌN Ì_1–”( Ì_”, Ì_”- Ì`”5 Ì`”6 Ì`”8 Ì` Ü ”( Ì_”, Ì_”- Ìa”6 Ìa”7 Ìa”; Ìa#”< Ìa$”ÌE Ìa-”ÌF Ìa.”ÌG Ìa/”ÌH Ìa0”ÌR Ìa:”ÌS Ìa;”Ì\ ÌaÌD”Ì] ÌaÌE”Ì^ ÌaÌF”Ì_ ÌaÌG”Ìi ÌaÌQ”Ìj ÌaÌR”Ìr ÌaÌZ’”$ Ì_”( Ì_’”$ Ì^”* Ì^’”$ ÌN”' ÌN’”$ ÌM”, ÌM’”  ÌM”( ÌM””; ÌL”? ÌL”Ì@ ÌL”ÌE ÌL’” ÌL
-” ÌL’” ÌK” ÌK‘” Ìo’” ” 
-‘” ÌtÔrF–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜC‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+
+@Component
+struct TaskRowView {
+  @StorageLink('app_theme') appThemeStr: string = 'scifi';
+  @ObjectLink task: TaskDataModel;
+  
+  get isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
+
+  build() {
+    Row() {
+      Column({ space: 6 }) {
+        Row() {
+          if (this.task.isMLGenerated) {
+            Text(this.isKawaii ? "ğŸª„ " : "âš¡ ")
+              .fontColor(SciFiTheme.neonMagenta)
+          }
+          Text(this.task.title)
+            .fontSize(16)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(this.task.completed ? SciFiTheme.textSecondary : SciFiTheme.textMain)
+            .decoration({ type: this.task.completed ? TextDecorationType.LineThrough : TextDecorationType.None })
+        }
+        
+        if (this.task.details) {
+          Text(this.task.details)
+            .fontSize(10)
+            .fontColor(SciFiTheme.neonCyan)
+        }
+        
+        Row() {
+          Text("ğŸ•’ ")
+            .fontColor(SciFiTheme.neonMagenta)
+          Text(this.task.dueDate.toLocaleTimeString())
+            .fontSize(10)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(SciFiTheme.textSecondary)
+        }
+      }
+      .alignItems(HorizontalAlign.Start)
+      
+      Blank()
+      
+      Button({ type: ButtonType.Circle }) {
+        Text(this.task.completed ? (this.isKawaii ? "âœ“" : "â¬¢") : (this.isKawaii ? "â—‹" : "â¬¡"))
+          .fontSize(24)
+          .fontColor(this.task.completed ? SciFiTheme.neonGreen : SciFiTheme.neonCyan)
+      }
+      .backgroundColor(Color.Transparent)
+      .onClick(() => {
+        this.task.completed = !this.task.completed;
+      })
+    }
+    .padding(15)
+    .backgroundColor(SciFiTheme.panelBackground)
+    .borderRadius(15)
+    .width('100%')
+  }
+}
+
+@Component
+struct FloatingAnimalsOverlay {
+  @State yOffset: number = 0;
+  
+  aboutToAppear() {
+    setInterval(() => {
+      this.yOffset = this.yOffset === 0 ? -20 : 0;
+    }, 2000);
+  }
+
+  build() {
+    Stack() {
+      Text("ğŸ¦„").fontSize(60).position({ x: '20%', y: '20%' }).opacity(0.3).translate({ y: this.yOffset })
+      Text("ğŸ¼").fontSize(50).position({ x: '70%', y: '40%' }).opacity(0.3).translate({ y: -this.yOffset })
+      Text("ğŸ€").fontSize(70).position({ x: '40%', y: '70%' }).opacity(0.2).translate({ y: this.yOffset })
+    }.width('100%').height('100%').animation({ duration: 2000 })
+  }
+}
+
+@Component
+struct FloatingBotsOverlay {
+  @State yOffset: number = 0;
+  @State scanlineY: number = -200;
+
+  aboutToAppear() {
+    setInterval(() => {
+      this.yOffset = this.yOffset === 0 ? -20 : 0;
+    }, 2000);
+    setInterval(() => {
+      this.scanlineY = this.scanlineY > 800 ? -200 : this.scanlineY + 5;
+    }, 50);
+  }
+
+  build() {
+    Stack() {
+      Text("ğŸ‘¾").fontSize(60).position({ x: '10%', y: '15%' }).opacity(0.3).translate({ y: this.yOffset })
+      Text("ğŸ¤–").fontSize(50).position({ x: '80%', y: '30%' }).opacity(0.3).translate({ y: -this.yOffset })
+      Text("ğŸ›¸").fontSize(70).position({ x: '50%', y: '80%' }).opacity(0.2).translate({ y: this.yOffset })
+      
+      Rect()
+        .width('100%')
+        .height(60)
+        .fill(SciFiTheme.neonCyan)
+        .opacity(0.2)
+        .position({ y: this.scanlineY })
+    }.width('100%').height('100%').animation({ duration: 2000 })
+  }
+}
+ÀÔrC’·../models/TaskDataModel³../theme/SciFiThemeÔrD—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙW/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/models/TaskDataModel.etsAÃªoh-resolveÂDAÂÙS/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets/theme/SciFiTheme.etsAÃªoh-resolveÂ“ÔrE–§version¤fileªsourceRoot§sources¥names¨mappings¨Index.js ‘©Index.etsÜN˜”    ”  ”	  	”  ”  ”  ”7  7”8  8˜”   ” ”	 	” ” ” ”0 0”1 1’” ” ‘”  ””4 ”? ”ÌA 2”ÌH 9’”4 "”6 $””; ”? "”ÌC &”ÌE (‘” 1’” ” '’” ” '’” 	” ’” 	” ’” 	” ’” 	” ‘” "’” #” #	’” $” $’” %” %
+’” $” $–” %” %
+” &	” &” &” &’” $” $–” %” %
+” &” &” &” &$’” $” $Ü ” %” %
+” '	” '” '” '” '”# '”$ '”% '”& '”0 '(”1 ')”9 '1”: '2”; '3”< '4”ÌF '>”ÌG '?”ÌR 'ÌJ’” )” )–” *” *
+” *” *” *” *’”8 +”ÌN +‘” ,‘” ,’”8 -”ÌK -‘” .˜” 0” 0” 0” 0”! 0”# 0”% 0”' 0’” 1” 1’” 2” 2’” 1” 1–” 2” 2” Ìi	” Ìi” Ìi” Ìi’” 1” 1Ü ” 2” 2” Ìj	” Ìj” Ìj” Ìj” Ìj”  Ìj”" Ìj”$ Ìj”) Ìj"”+ Ìj$”- Ìj&”/ Ìj(”2 Ìj+”4 Ìj-”6 Ìj/”8 Ìj1’” 3
+” 3˜” 3
+” 3” <” <” <”- <%”. <&”3 <+” 4” 4” 4” 4” 4”% 4”& 4”' 4 ”( 4!”< 45”= 46”> 47”? 48”ÌP 4ÌI–” 4” 4” 5” 5” 5” 5˜” 4” 4” 6” 6” 6”& 6$”' 6%”+ 6)Ü ” 4” 4” 7” 7” 7” 7”  7”( 7&”) 7'”* 7(”+ 7)”5 73”6 74”Ì@ 7>”ÌA 7?”ÌB 7Ì@”ÌC 7ÌA”ÌM 7ÌK”ÌN 7ÌL”ÌY 7ÌW’” 4” 4” 8” 8” 8” 8” 8”% 8”& 8”' 8 ”( 8!”ÌB 8;”ÌC 8<”ÌD 8=”ÌE 8>”ÌY 8ÌR–” 8” 8” 9” 9” 9” 9Ü ” 8” 8” :” :” :” :”  :”( :&”) :'”* :(”+ :)”5 :3”6 :4”Ì@ :>”ÌA :?”ÌB :Ì@”ÌC :ÌA”ÌM :ÌK”ÌN :ÌL”ÌV :ÌT’” 8” 8’” 3
+” 3’” >
+” >’” >
+” >˜” Ì@
+” Ì@” Ì@” Ì@” Ì@”  Ì@”" Ì@”$ Ì@’” ÌA”$ ÌA$š” ÌB” ÌB”# ÌB”% ÌB”) ÌB”+ ÌB”5 ÌB%”6 ÌB&”< ÌB,”> ÌB.’” ÌA”$ ÌA$˜” ÌB” ÌB” ÌG”" ÌG”# ÌG”- ÌG'”. ÌG(”= ÌG7’” ÌA”$ ÌA$–” ÌB” ÌB” ÌH” ÌH” ÌH” ÌH’” ÌA”$ ÌA$–” ÌB” ÌB” ÌH” ÌH” ÌH” ÌH ’” ÌA”$ ÌA$—” ÌB” ÌB” ÌI” ÌI” ÌI” ÌI”  ÌIÜ ” ÌJ” ÌJ” ÌJ”  ÌJ”# ÌJ!”' ÌJ%”( ÌJ&”0 ÌJ.”1 ÌJ/”2 ÌJ0”3 ÌJ1”: ÌJ8”; ÌJ9”< ÌJ:”= ÌJ;”ÌE ÌJÌC”ÌF ÌJÌD’” ÌK” ÌK” ÌC” ÌC” ÌC” ÌC” ÌC”% ÌC ”& ÌC!”' ÌC"”( ÌC#”+ ÌC&”, ÌC'”- ÌC(”. ÌC)”1 ÌC,–” ÌC” ÌC” ÌD” ÌD” ÌD” ÌDÜ ” ÌC” ÌC” ÌE” ÌE” ÌE” ÌE”  ÌE ”( ÌE(”) ÌE)”* ÌE*”+ ÌE+”5 ÌE5”6 ÌE6”Ì@ ÌEÌ@”ÌA ÌEÌA”ÌB ÌEÌB”ÌC ÌEÌC”ÌM ÌEÌM”ÌN ÌEÌN”ÌV ÌEÌV’” ÌC” ÌC’” ÌA”  ÌA$’” ÌB” ÌB’” ÌM” ÌMš” ÌN” ÌN”# ÌN”% ÌN”) ÌN”+ ÌN”5 ÌN%”6 ÌN&”< ÌN,”> ÌN.’” ÌM” ÌMÜ ” ÌN” ÌN” ÌT”" ÌT”# ÌT”' ÌT!”( ÌT"”0 ÌT*”1 ÌT+”2 ÌT,”3 ÌT-”= ÌT7”> ÌT8”ÌF ÌTÌ@”ÌG ÌTÌA”ÌH ÌTÌB”ÌI ÌTÌC”ÌT ÌTÌN’” ÌM” ÌM–” ÌN” ÌN” ÌU” ÌU” ÌU” ÌU’” ÌM” ÌM–” ÌN” ÌN” ÌU” ÌU” ÌU” ÌU ’” ÌM” ÌM—” ÌN” ÌN” ÌV” ÌV” ÌV” ÌV”  ÌVÜ ” ÌW” ÌW” ÌW” ÌW”" ÌW ”/ ÌW-”0 ÌW.”ÌA ÌW?”ÌC ÌWÌA”ÌR ÌWÌP”ÌT ÌWÌR”ÌY ÌWÌW”Ì[ ÌWÌY”Ì_ ÌWÌ]”Ì` ÌWÌ^”Ìl ÌWÌj”Ìm ÌWÌk”Ìn ÌWÌlš” ÌX” ÌX” ÌX” ÌX” ÌX” ÌX”  ÌX”' ÌX%”( ÌX&”) ÌX'’” ÌY” ÌY”” ÌO” ÌO” ÌO” ÌO–” ÌO” ÌO” ÌP” ÌP” ÌP” ÌP˜” ÌO” ÌO” ÌQ” ÌQ” ÌQ”& ÌQ&”' ÌQ'”+ ÌQ+Ü ” ÌO” ÌO” ÌR” ÌR” ÌR” ÌR”  ÌR ”( ÌR(”) ÌR)”* ÌR*”+ ÌR+”0 ÌR0”1 ÌR1”6 ÌR6”7 ÌR7”8 ÌR8”9 ÌR9”ÌC ÌRÌC”ÌD ÌRÌD”ÌL ÌRÌL’” ÌO” ÌO’” ÌM” ÌM’” ÌN” ÌN’” Ì[” Ì[š” Ì\” Ì\”# Ì\”% Ì\”) Ì\”+ Ì\”5 Ì\%”6 Ì\&”< Ì\,”> Ì\.’” Ì[” Ì[Ü ” Ì\” Ì\” Ì`”" Ì`”# Ì`”' Ì`!”( Ì`"”0 Ì`*”1 Ì`+”2 Ì`,”3 Ì`-”= Ì`7”> Ì`8”ÌI Ì`ÌC”ÌJ Ì`ÌD”ÌK Ì`ÌE”ÌL Ì`ÌF”ÌW Ì`ÌQ’” Ì[” Ì[–” Ì\” Ì\” Ìa” Ìa” Ìa” Ìa’” Ì[” Ì[–” Ì\” Ì\” Ìa” Ìa” Ìa” Ìa ’” Ì[” Ì[Ü ” Ì\” Ì\” Ìb” Ìb” Ìb” Ìb”! Ìb”# Ìb”' Ìb!”( Ìb"”0 Ìb*”1 Ìb+”2 Ìb,”3 Ìb-”4 Ìb.”5 Ìb/”6 Ìb0”7 Ìb1”: Ìb4”< Ìb6”ÌA Ìb;”ÌC Ìb=”ÌM ÌbÌG”ÌN ÌbÌH”ÌY ÌbÌS”Ì[ ÌbÌU’” Ì[” Ì[—” Ì\” Ì\” Ìc” Ìc” Ìc” Ìc”  ÌcÜ ” Ìd” Ìd” Ìd” Ìd”" Ìd ”/ Ìd-”0 Ìd.”> Ìd<”Ì@ Ìd>”ÌQ ÌdÌO”ÌS ÌdÌQ”ÌW ÌdÌU”ÌY ÌdÌW”Ì] ÌdÌ[”Ì^ ÌdÌ\”Ìj ÌdÌh”Ìk ÌdÌi”Ìl ÌdÌjš” Ìe” Ìe” Ìe” Ìe” Ìe” Ìe”  Ìe”' Ìe%”( Ìe&”) Ìe'’” Ìf” Ìf”” Ì]” Ì]” Ì]” Ì]–” Ì]” Ì]” Ì^” Ì^” Ì^” Ì^’” Ì]” Ì]’” Ì[” Ì[’” Ì\” Ì\’” Ì@
+” Ì@’” 1” 1’” 2” 2’” Ìl”' Ìlš” Ìm”& Ìm”- Ìm”/ Ìm”4 Ìm"”6 Ìm$”: Ìm(”; Ìm)”Ì@ Ìm.”ÌB Ìm0–” Ìm”! Ìm"”# Ìm$”' Ìm(”( Ìm)”- Ìm.–” Ìm” Ìm"” Ìm$”# Ìm(”$ Ìm)”) Ìm.’” Ìo”) Ìo%’” Ìp” Ìp’” Ìo”) Ìo%˜” Ìp” Ìp” Ì‡	” Ì‡” Ì‡”- Ì‡#”. Ì‡$”8 Ì‡.’” Ìo”) Ìo%˜” Ìp” Ìp” Ìˆ	” Ìˆ” Ìˆ”% Ìˆ”& Ìˆ”) Ìˆ˜” Ìq
+” Ìq” Ìq” Ìq” Ìq”  Ìq”" Ìq”$ Ìq” Ìq
+” Ìq” Ì…” Ì…” Ì…” Ì…” Ì…”  Ì…”" Ì…”$ Ì…”) Ì…$”+ Ì…&”- Ì…(”/ Ì…*’” Ìr” Ìr’” Ìs” ÌsÜ ” Ìs” Ìs” Ì}”" Ì}”# Ì}”% Ì}”( Ì}”* Ì}”, Ì} ”. Ì}"”4 Ì}(”6 Ì}*”8 Ì},”: Ì}.”> Ì}2”Ì@ Ì}4”ÌB Ì}6”ÌD Ì}8”ÌI Ì}=”ÌK Ì}?”ÌM Ì}ÌA”ÌO Ì}ÌCÜ ” Ìs” Ìs” Ì~”* Ì~”+ Ì~”/ Ì~#”0 Ì~$”9 Ì~-”: Ì~.”= Ì~1”Ì[ Ì~3”Ì_ Ì~7”Ì` Ì~8”Ìl Ì~ÌD”Ìn Ì~ÌE”Ìo Ì~ÌF”Ìp Ì~ÌG”Ìq Ì~ÌH”Ì{ Ì~ÌR”Ì| Ì~ÌS”Ì‡ Ì~Ì^”Ìˆ Ì~Ì_”Ì‰ Ì~Ì`”ÌŠ Ì~Ìa”Ì• Ì~Ìl–” Ìs” Ìs” Ì”' Ì”( Ì”* Ì—” Ìs” Ìs” Ì€”" Ì€”# Ì€”& Ì€”( Ì€—” Ì” Ì” Ì”) Ì!”, Ì$”/ Ì'”0 Ì(’” Ì‚” Ì‚” Ìt” Ìt”  Ìt”# Ìt”$ Ìt”, Ìt!”. Ìt#”/ Ìt$”8 Ìt-”9 Ìt.”: Ìt/”< Ìt0”= Ìt1”> Ìt2–” Ìt” Ìt” Ìu”! Ìu”" Ìu”$ Ìu˜” Ìt” Ìt” Ìv”# Ìv”$ Ìv”. Ìv(”/ Ìv)”3 Ìv-Ü ” Ìt” Ìt” Ìw”" Ìw”# Ìw”' Ìw!”( Ìw"”1 Ìw+”2 Ìw,”5 Ìw/”ÌS Ìw1”ÌW Ìw5”ÌX Ìw6”Ìd ÌwÌB”Ìf ÌwÌC”Ìg ÌwÌD”Ìh ÌwÌE”Ìi ÌwÌF”Ìs ÌwÌP”Ìt ÌwÌQ”Ì| ÌwÌY”Ì} ÌwÌZ”Ì~ ÌwÌ[”Ì ÌwÌ\”Ì‰ ÌwÌf”ÌŠ ÌwÌg”Ì— ÌwÌt’” Ìt” Ìtš” Ìx” Ìx”  Ìx”# Ìx”$ Ìx”+ Ìx ”- Ìx"”. Ìx#”6 Ìx+”8 Ìx-–” Ìx” Ìx” Ìy”! Ìy”" Ìy”$ Ìy˜” Ìx” Ìx” Ìz”# Ìz”$ Ìz”. Ìz(”/ Ìz)”5 Ìz/Ü ” Ìx” Ìx” Ì{”" Ì{”# Ì{”' Ì{!”( Ì{"”1 Ì{+”2 Ì{,”5 Ì{/”ÌS Ì{1”ÌW Ì{5”ÌX Ì{6”Ìd Ì{ÌB”Ìf Ì{ÌC”Ìg Ì{ÌD”Ìh Ì{ÌE”Ìi Ì{ÌF”Ìs Ì{ÌP”Ìt Ì{ÌQ”Ì| Ì{ÌY”Ì} Ì{ÌZ”Ì~ Ì{Ì[”Ì Ì{Ì\”Ì‰ Ì{Ìf”ÌŠ Ì{Ìg”Ì’ Ì{Ìo’” Ìx” Ìx’” Ìs” Ìs””/ Ìr”3 Ìr”4 Ìr”> Ìr#’” Ìr” Ìr’” Ìq
+” Ìq’” Ìo”% Ìo%’” Ìp” Ìp’” ÌŠ” ÌŠš” Ì‹” Ì‹” Ì‹” Ì‹”" Ì‹”# Ì‹”) Ì‹%”. Ì‹*”/ Ì‹+”1 Ì‹-’” ÌŒ
+” ÌŒ˜” ÌŒ
+” ÌŒ” Ì’”- Ì’”. Ì’”7 Ì’#”8 Ì’$”> Ì’*–” ÌŒ
+” ÌŒ” Ì“”+ Ì“”, Ì“”- Ì“” Ì” Ì”$ Ì”( Ì”) Ì”1 Ì”2 Ì”3 Ì ”4 Ì!”ÌQ Ì>”ÌR Ì?”ÌS ÌÌ@”ÌT ÌÌA”Ìm ÌÌZ–” Ì” Ì” Ì”% Ì”& Ì”( Ì˜” Ì” Ì” Ì”' Ì”( Ì”2 Ì$”3 Ì%”7 Ì)˜” Ì” Ì” Ì”& Ì”' Ì”1 Ì#”2 Ì$”? Ì1’” Ì” Ì’” ÌŒ
+” ÌŒ‘” Ì”	‘” Ì”˜” Ì•
+” Ì•”$ Ì•”& Ì•”+ Ì•”- Ì•”/ Ì•”1 Ì•” Ì•
+” Ì•” Ìœ”$ Ìœ”% Ìœ”' Ìœ”+ Ìœ”- Ìœ”/ Ìœ”1 Ìœ”6 Ìœ$”8 Ìœ&”: Ìœ(”< Ìœ*–” Ì•
+” Ì•” Ì”) Ì”* Ì”+ Ì’” Ì–” Ì–’”( Ì—”0 Ì—˜”ÌH Ì˜”ÌS Ì˜”ÌZ Ì˜”Ì\ Ì˜”Ì` Ì˜"”Ìb Ì˜$”Ìf Ì˜(”Ìh Ì˜*””8 Ì˜”< Ì˜"”> Ì˜$”ÌB Ì˜(””4 Ì˜”8 Ì˜"”: Ì˜$”> Ì˜(’”$ Ì—”, Ì—’”  Ì—”( Ì—””; Ì–”? Ì–”Ì@ Ì–”ÌM Ì–&’” Ì–” Ì–’” Ì•
+” Ì•‘” Ì	’” 0” 0’” #” #	‘” Ì¡–” Ì£” Ì£” Ì£” Ì£” Ì£” Ì£›” Ì¤” Ì¤” Ì¤” Ì¤” Ì¤” Ì¤”$ Ì¤ ”& Ì¤"”' Ì¤#”2 Ì¤.”4 Ì¤0š” Ì¥” Ì¥” Ì¥” Ì¥” Ì¥” Ì¥”  Ì¥”! Ì¥ ”) Ì¥(”+ Ì¥*›” Ì¦” Ì¦” Ì¦” Ì¦” Ì¦” Ì¦” Ì¦”  Ì¦”' Ì¦&”) Ì¦(”* Ì¦)’” Ì§” Ì§’” Ì«” Ì«‘” Ìª ””4 Ì¬”? Ì¬”ÌA Ì¬2”ÌH Ì¬9‘” Ì¨’”" Ì­”' Ì­’” Ì¬” Ì¬'’” Ì¬” Ì¬'’” Ì­” Ì­’” Ì­” Ì­‘” Ì³’” Ì´” Ì´
+–” Ì´” Ì´
+” ÌÍ” ÌÍ” ÌÍ” ÌÍ˜” Ì´” Ì´
+” ÌÎ”" ÌÎ”# ÌÎ”- ÌÎ”. ÌÎ ”= ÌÎ/–” Ì´” Ì´
+” ÌÏ” ÌÏ”  ÌÏ”" ÌÏ” Ì´” Ì´
+” ÌĞ” ÌĞ” ÌĞ” ÌĞ”  ÌĞ”" ÌĞ”$ ÌĞ”& ÌĞ”+ ÌĞ”- ÌĞ”/ ÌĞ!”1 ÌĞ#” Ìµ” Ìµ
+” Ìµ” Ìµ” Ìµ”% Ìµ”& Ìµ”' Ìµ”( Ìµ”= Ìµ0”> Ìµ1”? Ìµ2”Ì@ Ìµ3”ÌT ÌµÌG–” Ìµ” Ìµ
+” Ì¶	” Ì¶” Ì¶” Ì¶˜” Ìµ” Ìµ
+” Ì·	” Ì·” Ì·”% Ì·”& Ì·”1 Ì·)š” Ìµ” Ìµ
+” Ì¸	” Ì¸” Ì¸” Ì¸”  Ì¸”" Ì¸”$ Ì¸”& Ì¸’” Ìµ” Ìµ
+’” Ìº” Ìº	–” Ìº” Ìº	” ÌË” ÌË” ÌË” ÌË’” Ì»” Ì»˜” Ì»” Ì»” ÌÀ
+” ÌÀ” ÌÀ”- ÌÀ$”. ÌÀ%”3 ÌÀ*” Ì¼
+” Ì¼” Ì¼” Ì¼” Ì¼”% Ì¼”& Ì¼”' Ì¼”( Ì¼”5 Ì¼,”6 Ì¼-”7 Ì¼.”8 Ì¼/”ÌG Ì¼>–” Ì¼
+” Ì¼” Ì½” Ì½” Ì½” Ì½˜” Ì¼
+” Ì¼” Ì¾” Ì¾” Ì¾”% Ì¾!”& Ì¾"”3 Ì¾/’” Ì¼
+” Ì¼’” Ì¿
+” Ì¿Ü ” Ì¿
+” Ì¿” Ì¿” Ì¿” Ì¿” Ì¿” Ì¿” Ì¿”  Ì¿ ”" Ì¿"”$ Ì¿$”( Ì¿(”) Ì¿)”7 Ì¿7”: Ì¿:”< Ì¿<”= Ì¿=”Ì@ Ì¿Ì@”ÌD Ì¿ÌD–” Ì¿
+” Ì¿” Ì¿ÌF” Ì¿ÌL” Ì¿ÌM” Ì¿ÌO˜” Ì¿
+” Ì¿” Ì¿ÌQ” Ì¿ÌU” Ì¿ÌV”  Ì¿Ì`”! Ì¿Ìa”* Ì¿Ìj–” Ì¿
+” Ì¿” Ì¿Ìl” Ì¿Ìx” Ì¿Ìy” Ì¿Ìz’” Ì»” Ì»’” ÌÂ” ÌÂ’” ÌÂ” ÌÂ’” ÌÄ” ÌÄ˜” ÌÄ” ÌÄ” ÌÉ
+” ÌÉ” ÌÉ”- ÌÉ$”. ÌÉ%”1 ÌÉ(” ÌÅ
+” ÌÅ” ÌÅ” ÌÅ” ÌÅ”% ÌÅ”& ÌÅ”' ÌÅ”( ÌÅ”2 ÌÅ)”3 ÌÅ*”4 ÌÅ+”5 ÌÅ,”ÌB ÌÅ9–” ÌÅ
+” ÌÅ” ÌÆ” ÌÆ” ÌÆ” ÌÆ˜” ÌÅ
+” ÌÅ” ÌÇ” ÌÇ” ÌÇ”% ÌÇ!”& ÌÇ"”3 ÌÇ/’” ÌÅ
+” ÌÅ’” ÌÈ
+” ÌÈÜ ” ÌÈ
+” ÌÈ” ÌÈ” ÌÈ” ÌÈ” ÌÈ” ÌÈ” ÌÈ”  ÌÈ ”" ÌÈ"”$ ÌÈ$”( ÌÈ(”) ÌÈ)”5 ÌÈ5”8 ÌÈ8”: ÌÈ:”; ÌÈ;”> ÌÈ>”ÌB ÌÈÌB–” ÌÈ
+” ÌÈ” ÌÈÌD” ÌÈÌJ” ÌÈÌK” ÌÈÌM˜” ÌÈ
+” ÌÈ” ÌÈÌO” ÌÈÌS” ÌÈÌT”  ÌÈÌ^”! ÌÈÌ_”) ÌÈÌg–” ÌÈ
+” ÌÈ” ÌÈÌi” ÌÈÌu” ÌÈÌv” ÌÈÌw’” ÌÄ” ÌÄ’” Ìº” Ìº	’” Ì´” Ì´
+‘” ÌÑ’” ÌÕ” ÌÕ‘” ÌÔ ””4 ÌÖ”? ÌÖ”ÌA ÌÖ2”ÌH ÌÖ9‘” ÌÒ’” ÌÖ” ÌÖ'’” ÌÖ” ÌÖ'’” Ì×” Ì×‘” ÌÛ’” ÌÜ” ÌÜ–” ÌÜ” ÌÜ” Í” Í” Í” Í˜” ÌÜ” ÌÜ” Í” Í”  Í”* Í”+ Í ”: Í/–” ÌÜ” ÌÜ” Í	” Í	” Í	” Í	–” ÌÜ” ÌÜ” Í
+” Í
+
+” Í
+” Í
+˜” Ìİ” Ìİ” Ìİ” Ìİ”! Ìİ”# Ìİ”$ Ìİ”& Ìİ˜” Ìİ” Ìİ” Ìù” Ìù” Ìù”- Ìù!”. Ìù"”3 Ìù'’” ÌŞ” ÌŞ˜” Ìß
+” Ìß” Ìß” Ìß” Ìß” Ìß”' Ìß%”) Ìß'” Ìà” Ìà”$ Ìà”( Ìà”) Ìà”1 Ìà”2 Ìà”3 Ìà ”4 Ìà!”9 Ìà&”: Ìà'”; Ìà(”< Ìà)”Ì@ Ìà-˜” Ìà” Ìà” Ìá”& Ìá”' Ìá”1 Ìá#”2 Ìá$”= Ìá/’” Ìà” Ìà‘” Ìâ‘” Ìâ˜” Ìã
+” Ìã” Ìã” Ìã” Ìã”! Ìã”" Ìã”' Ìã–” Ìã
+” Ìã” Ìä” Ìä” Ìä” Ìä˜” Ìã
+” Ìã” Ìå” Ìå” Ìå”& Ìå"”' Ìå#”+ Ìå'Ü ” Ìã
+” Ìã” Ìæ” Ìæ” Ìæ” Ìæ”  Ìæ”$ Ìæ ”% Ìæ!”. Ìæ*”/ Ìæ+”0 Ìæ,”1 Ìæ-”; Ìæ7”< Ìæ8”ÌI ÌæÌE”ÌJ ÌæÌF”ÌK ÌæÌG”ÌL ÌæÌH”ÌV ÌæÌR”ÌW ÌæÌS”Ì_ ÌæÌ[Ü ” Ìã
+” Ìã” Ìç” Ìç” Ìç” Ìç”" Ìç”$ Ìç ”( Ìç$”) Ìç%”- Ìç)”. Ìç*”7 Ìç3”8 Ìç4”9 Ìç5”: Ìç6”ÌL ÌçÌH”ÌM ÌçÌI”ÌX ÌçÌT”ÌY ÌçÌU”ÌZ ÌçÌV”Ì[ ÌçÌW”Ìm ÌçÌi”Ìn ÌçÌj”Ìr ÌçÌn”Ìt ÌçÌp’” Ìã
+” Ìã’” ÌŞ” ÌŞ˜” Ìê” Ìê” Ìê” Ìê” Ìê” Ìê”! Ìê”# Ìê˜” Ìë
+” Ìë”$ Ìë”( Ìë”) Ìë”- Ìë”. Ìë”5 Ìë –” Ìë
+” Ìë” Ìì”% Ìì”& Ìì”( Ìì˜” Ìë
+” Ìë” Ìí”& Ìí”' Ìí”1 Ìí!”2 Ìí"”: Ìí*’” Ìë
+” Ìë‘” Ìî	‘” Ìî	’” Ìğ” Ìğ”” Ìñ
+” Ìñ” Ìñ” Ìñ˜” Ìñ
+” Ìñ” Ìò” Ìò” Ìò”% Ìò!”& Ìò"”1 Ìò-’” Ìñ
+” Ìñ›” Ìó
+” Ìó” Ìó” Ìó” Ìó”! Ìó”" Ìó”) Ìó ”* Ìó!”< Ìó3”> Ìó5–” Ìó
+” Ìó” Ìô” Ìô” Ìô” Ìô˜” Ìó
+” Ìó” Ìõ” Ìõ” Ìõ”& Ìõ"”' Ìõ#”+ Ìõ'˜” Ìó
+” Ìó” Ìö” Ìö” Ìö”% Ìö!”& Ìö"”3 Ìö/’” Ìó
+” Ìó’” Ìğ” Ìğ’” Ìİ” Ìİ’” Ìû” Ìû’” Ìû” Ìûš” Ìı” Ìı”# Ìı”% Ìı”) Ìı”+ Ìı”5 Ìı”6 Ìı ”< Ìı&”> Ìı(˜” Ìı” Ìı” Í”" Í”# Í”( Í”) Í”4 Í(—” Ìı” Ìı” Í” Í” Í” Í”  Í” Í” Í” Í” Í” Í”# Í”& Í”' Í”+ Í#”, Í$”0 Í(”1 Í)”: Í2”; Í3’” Í” ÍÜ (” Ìş” Ìş” Ìş” Ìş” Ìş”! Ìş”" Ìş”+ Ìş ”, Ìş!”- Ìş"”. Ìş#”/ Ìş$”3 Ìş(”4 Ìş)”< Ìş1”= Ìş2”> Ìş3”? Ìş4”ÌB Ìş7”ÌC Ìş8”ÌD Ìş9”ÌE Ìş:”ÌH Ìş=”ÌI Ìş>”ÌJ Ìş?”ÌK ÌşÌ@”ÌL ÌşÌA”ÌM ÌşÌB”ÌQ ÌşÌF”ÌR ÌşÌG”ÌZ ÌşÌO”Ì[ ÌşÌP”Ì\ ÌşÌQ”Ì] ÌşÌR”Ì` ÌşÌU”Ìa ÌşÌV”Ìb ÌşÌW”Ìc ÌşÌX”Ìf ÌşÌ[”Ìg ÌşÌ\–” Ìş” Ìş” Ìÿ” Ìÿ” Ìÿ” ÌÿÜ ” Ìş” Ìş” Í ” Í ” Í ” Í ”  Í ”$ Í ”% Í ”. Í (”/ Í )”0 Í *”1 Í +”; Í 5”< Í 6”ÌE Í ?”ÌF Í Ì@”ÌG Í ÌA”ÌH Í ÌB”ÌR Í ÌL”ÌS Í ÌM”Ì[ Í ÌU’” Ìş” Ìş’” Ìı” Ìı’” ÌÜ” ÌÜ‘” Í’” Í” Í‘” Í ’”6 Í”7 Í‘” Í’” Í	” Í’” Í	” Í’” Í” Í•” Í” Í” Í” Í” ÍÜ ” Í” Í
+” Í” Í” Í” Í”  Í”' Í!”, Í&”- Í'”. Í(”/ Í)”0 Í*”1 Í+”3 Í-”4 Í.”5 Í/”6 Í0”7 Í1”8 Í2–” Í”	 Í” Í” Í” Í” Í’” Í” Í‘” Í’” Í” Í	˜” Í#”( Í,”) Í-”+ Í/”3 Í7”5 Í9”9 Í=”; Í?–” Í” Í	” Í” Í” Í” Í–” Í” Í	” Í” Í” Í” Í!’” Í#”( Í,”” Í” Í
+” Í” Í–” Í” Í
+” Í” Í” Í” Í” Í” Í
+” Í” Í&” Í'” Í)” Í*” Í,”$ Í1”& Í3”' Í4”) Í6”. Í;”0 Í=–” Í” Í
+” Í?” ÍÌF” ÍÌG” ÍÌJœ” Í” Í
+” ÍÌL” ÍÌU” ÍÌV” ÍÌX” ÍÌY”  ÍÌ[”$ ÍÌ_”% ÍÌ`”, ÍÌg”. ÍÌi’” Í” Í
+”” Í” Í
+” Í” Í–” Í” Í
+” Í” Í” Í” Í” Í” Í
+” Í” Í&” Í'” Í)” Í*” Í,”$ Í1”& Í3”' Í4”) Í6”. Í;”0 Í=–” Í” Í
+” Í?” ÍÌF” ÍÌG” ÍÌJ” Í” Í
+” ÍÌL” ÍÌU” ÍÌV” ÍÌX” ÍÌY”  ÍÌ[”! ÍÌ\”% ÍÌ`”& ÍÌa”- ÍÌh”/ ÍÌj’” Í” Í
+”” Í” Í
+” Í” Í–” Í” Í
+” Í” Í” Í” Í” Í” Í
+” Í” Í&” Í'” Í)” Í*” Í,”$ Í1”& Í3”' Í4”) Í6”. Í;”0 Í=–” Í” Í
+” Í?” ÍÌF” ÍÌG” ÍÌJœ” Í” Í
+” ÍÌL” ÍÌU” ÍÌV” ÍÌX” ÍÌY”  ÍÌ[”$ ÍÌ_”% ÍÌ`”, ÍÌg”. ÍÌi’” Í” Í
+’” Í” Í	‘” Í’” Í"” Í"‘” Í! ’”6 Í#”7 Í#“”8 Í$”9 Í$”< Í$!‘” Í’” Í#	” Í#’” Í#	” Í#’” Í$	” Í$’” Í$	” Í$’” Í&” Í&•” Í'” Í'” Í'” Í'” Í'Ü ” Í(” Í(
+” Í(” Í(” Í(” Í(”  Í(”' Í(!”, Í(&”- Í('”. Í((”/ Í()”0 Í(*”1 Í(+”3 Í(-”4 Í(.”5 Í(/”6 Í(0”7 Í(1”8 Í(2–” Í)”	 Í)” Í)” Í)” Í)” Í)•” Í*” Í*” Í*” Í*” Í*Ü ” Í+” Í+
+” Í+” Í+” Í+”! Í+”" Í+”+ Í+%”. Í+(”1 Í++”2 Í+,”3 Í+-”4 Í+.”5 Í+/”8 Í+2”9 Í+3”: Í+4”; Í+5”? Í+9”Ì@ Í+:”ÌI Í+ÌC”ÌL Í+ÌF”ÌM Í+ÌG”ÌN Í+ÌH–” Í,”	 Í,” Í,” Í,	” Í,
+” Í,’” Í-” Í-‘” Í/’” Í0” Í0	˜” Í;#”( Í;,”) Í;-”+ Í;/”3 Í;7”5 Í;9”9 Í;=”; Í;?–” Í0” Í0	” Í;” Í;” Í;” Í;–” Í0” Í0	” Í;” Í;” Í;” Í;!’” Í;#”( Í;,”” Í1” Í1
+” Í1” Í1–” Í1” Í1
+” Í1” Í1” Í1” Í1” Í1” Í1
+” Í1” Í1&” Í1'” Í1)” Í1*” Í1,”$ Í11”& Í13”' Í14”) Í16”. Í1;”0 Í1=–” Í1” Í1
+” Í1?” Í1ÌF” Í1ÌG” Í1ÌJœ” Í1” Í1
+” Í1ÌL” Í1ÌU” Í1ÌV” Í1ÌX” Í1ÌY”  Í1Ì[”$ Í1Ì_”% Í1Ì`”, Í1Ìg”. Í1Ìi’” Í1” Í1
+”” Í2” Í2
+” Í2” Í2–” Í2” Í2
+” Í2” Í2” Í2” Í2” Í2” Í2
+” Í2” Í2&” Í2'” Í2)” Í2*” Í2,”$ Í21”& Í23”' Í24”) Í26”. Í2;”0 Í2=–” Í2” Í2
+” Í2?” Í2ÌF” Í2ÌG” Í2ÌJ” Í2” Í2
+” Í2ÌL” Í2ÌU” Í2ÌV” Í2ÌX” Í2ÌY”  Í2Ì[”! Í2Ì\”% Í2Ì`”& Í2Ìa”- Í2Ìh”/ Í2Ìj’” Í2” Í2
+”” Í3” Í3
+” Í3” Í3–” Í3” Í3
+” Í3” Í3” Í3” Í3” Í3” Í3
+” Í3” Í3&” Í3'” Í3)” Í3*” Í3,”$ Í31”& Í33”' Í34”) Í36”. Í3;”0 Í3=–” Í3” Í3
+” Í3?” Í3ÌF” Í3ÌG” Í3ÌJœ” Í3” Í3
+” Í3ÌL” Í3ÌU” Í3ÌV” Í3ÌX” Í3ÌY”  Í3Ì[”$ Í3Ì_”% Í3Ì`”, Í3Ìg”. Í3Ìi’” Í3” Í3
+’” Í5” Í5
+–” Í5” Í5
+” Í6	” Í6” Í6” Í6–” Í5” Í5
+” Í7	” Í7” Í7” Í7˜” Í5” Í5
+” Í8	” Í8” Í8”  Í8”! Í8”) Í8!–” Í5” Í5
+” Í9	” Í9” Í9” Í9œ” Í5” Í5
+” Í:	” Í:” Í:” Í:” Í:” Í:”# Í:”$ Í:”- Í:%”/ Í:'’” Í0” Í0	‘” Í<ÔrF–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜT‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
  ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
- ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ÔrG’§missing¦pluginÃ¦genAbcÂÔ  ÔrH”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrI•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¸‘ÔrJ•¤type¥start£end¨imported¥local¯ImportSpecifierÌ‰Ì–ÔrK”¤type¥start£end¤nameªIdentifierÌ‰Ì–­TaskDataModelKªIdentifierÌ‰Ì–­TaskDataModelÔrL•¤type¥start£end¥value£raw§LiteralÌÌ··../models/TaskDataModel¹'../models/TaskDataModel'I±ImportDeclarationÌºÌë‘J¯ImportSpecifierÌÃÌÍKªIdentifierÌÃÌÍªSciFiThemeKªIdentifierÌÃÌÍªSciFiThemeL§LiteralÌÕÌê³../theme/SciFiThemeµ'../theme/SciFiTheme'
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ÔrG’§missing¦pluginÃ¦genAbcÂÔ  ÔrH”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrI•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¸‘ÔrJ•¤type¥start£end¨imported¥local¯ImportSpecifierÌ‰Ì–ÔrK”¤type¥start£end¤nameªIdentifierÌ‰Ì–­TaskDataModelKªIdentifierÌ‰Ì–­TaskDataModelÔrL•¤type¥start£end¥value£raw§LiteralÌÌ··../models/TaskDataModel¹'../models/TaskDataModel'I±ImportDeclarationÌºÌë‘J¯ImportSpecifierÌÃÌÍKªIdentifierÌÃÌÍªSciFiThemeKªIdentifierÌÃÌÍªSciFiThemeL§LiteralÌÕÌê³../theme/SciFiThemeµ'../theme/SciFiTheme'

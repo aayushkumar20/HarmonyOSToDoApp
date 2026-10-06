@@ -8,11 +8,11 @@ struct Index {
   @State tasks: TaskDataModel[] = [];
   @State selectedDate: Date = new Date();
   
-  get isKawaii(): boolean {
+  isKawaii(): boolean {
     return this.appThemeStr === 'kawaii';
   }
 
-  get daysInWeek(): Date[] {
+  getDaysInWeek(): Date[] {
     let days: Date[] = [];
     let today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -23,7 +23,7 @@ struct Index {
     return days;
   }
 
-  get filteredTasks(): TaskDataModel[] {
+  getFilteredTasks(): TaskDataModel[] {
     return this.tasks.filter(t => {
       let tD = new Date(t.dueDate);
       return tD.getFullYear() === this.selectedDate.getFullYear() &&
@@ -37,10 +37,10 @@ struct Index {
       // Background
       Rect()
         .width('100%').height('100%')
-        .fill(this.isKawaii ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace)
+        .fill(this.isKawaii() ? SciFiTheme.kawaiiBg : SciFiTheme.bgDeepSpace)
       
       // Floating Overlay
-      if (this.isKawaii) {
+      if (this.isKawaii()) {
         FloatingAnimalsOverlay()
       } else {
         FloatingBotsOverlay()
@@ -50,13 +50,13 @@ struct Index {
         // Header Bar
         Row() {
           Column() {
-            Text(this.isKawaii ? "Magic Checklist 🎀" : "SYS.TODOS: ONNX")
+            Text(this.isKawaii() ? "Magic Checklist 🎀" : "SYS.TODOS: ONNX")
               .fontSize(24)
               .fontWeight(FontWeight.Bold)
-              .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
-            Text(this.isKawaii ? "Cute Magical Scanner 🐰✨" : "DATA_STREAM_ACTIVE")
+              .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonMagenta)
+            Text(this.isKawaii() ? "Cute Magical Scanner 🐰✨" : "DATA_STREAM_ACTIVE")
               .fontSize(14)
-              .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
+              .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
           }
           .alignItems(HorizontalAlign.Start)
 
@@ -65,14 +65,14 @@ struct Index {
           Row({ space: 12 }) {
             // Theme Switcher Toggle
             Button({ type: ButtonType.Circle }) {
-              Text(this.isKawaii ? "✨" : "⬡")
+              Text(this.isKawaii() ? "✨" : "⬡")
                 .fontSize(20)
-                .fontColor(this.isKawaii ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
+                .fontColor(this.isKawaii() ? SciFiTheme.kawaiiPink : SciFiTheme.neonCyan)
             }
             .backgroundColor(SciFiTheme.panelBackground)
             .width(40).height(40)
             .onClick(() => {
-              this.appThemeStr = this.isKawaii ? 'scifi' : 'kawaii';
+              this.appThemeStr = this.isKawaii() ? 'scifi' : 'kawaii';
             })
 
             // Add Button
@@ -80,9 +80,9 @@ struct Index {
               Text("+")
                 .fontSize(24)
                 .fontWeight(FontWeight.Bold)
-                .fontColor(this.isKawaii ? Color.White : SciFiTheme.neonCyan)
+                .fontColor(this.isKawaii() ? Color.White : SciFiTheme.neonCyan)
             }
-            .backgroundColor(this.isKawaii ? SciFiTheme.neonCyan : '#2600FFFF')
+            .backgroundColor(this.isKawaii() ? SciFiTheme.neonCyan : '#2600FFFF')
             .width(40).height(40)
             .onClick(() => {
               let newTask = new TaskDataModel("New Manual Task", "MANUAL_INJECT", false, this.selectedDate);
@@ -94,9 +94,9 @@ struct Index {
               Text("📷")
                 .fontSize(20)
             }
-            .backgroundColor(this.isKawaii ? SciFiTheme.neonMagenta : '#26FF00FF')
+            .backgroundColor(this.isKawaii() ? SciFiTheme.neonMagenta : '#26FF00FF')
             .width(40).height(40)
-            .border({ width: this.isKawaii ? 0 : 1.5, color: SciFiTheme.neonMagenta })
+            .border({ width: this.isKawaii() ? 0 : 1.5, color: SciFiTheme.neonMagenta })
             .onClick(() => {
               let newTask = new TaskDataModel("Scanned Bill", "EXTRACT_SUCCESS", true, this.selectedDate);
               this.tasks.push(newTask);
@@ -107,12 +107,12 @@ struct Index {
         .padding({ left: 20, right: 20, top: 40 })
 
         // Dashboard Charts
-        CuteDashboardChart({ tasks: this.tasks })
+        CuteDashboardChart({ tasks: $tasks })
 
         // Apple Calendar Scroll View
         Scroll() {
           Row({ space: 15 }) {
-            ForEach(this.daysInWeek, (day: Date) => {
+            ForEach(this.getDaysInWeek(), (day: Date) => {
               Column() {
                 Text(day.toString().substring(0,3))
                   .fontSize(12)
@@ -137,9 +137,9 @@ struct Index {
         .scrollBar(BarState.Off)
 
         // Filtered Task UI
-        if (this.filteredTasks.length === 0) {
+        if (this.getFilteredTasks().length === 0) {
           Column() {
-            Text(this.isKawaii ? "No Magical Tasks Today! 🐹✨" : "AWAITING_NEURAL_LINK...")
+            Text(this.isKawaii() ? "No Magical Tasks Today! 🐹✨" : "AWAITING_NEURAL_LINK...")
               .fontSize(16)
               .fontWeight(FontWeight.Bold)
               .fontColor(SciFiTheme.textSecondary)
@@ -148,7 +148,7 @@ struct Index {
           .layoutWeight(1)
         } else {
           List({ space: 10 }) {
-            ForEach(this.filteredTasks, (task: TaskDataModel) => {
+            ForEach(this.getFilteredTasks(), (task: TaskDataModel) => {
               ListItem() {
                 TaskRowView({ task: task })
               }
@@ -171,34 +171,34 @@ struct Index {
 @Component
 struct CuteDashboardChart {
   @StorageLink('app_theme') appThemeStr: string = 'scifi';
-  @Prop tasks: TaskDataModel[];
+  @Link tasks: TaskDataModel[];
   
-  get isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
-  get completedCount(): number { return this.tasks.filter(t => t.completed).length; }
-  get pendingCount(): number { return this.tasks.filter(t => !t.completed).length; }
+  isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
+  getCompletedCount(): number { return this.tasks.filter(t => t.completed).length; }
+  getPendingCount(): number { return this.tasks.filter(t => !t.completed).length; }
 
   build() {
     Column() {
-      Text(this.isKawaii ? "Magical Progress 🌸" : "SYSTEM_DIAGNOSTICS")
+      Text(this.isKawaii() ? "Magical Progress 🌸" : "SYSTEM_DIAGNOSTICS")
         .fontSize(14)
         .fontColor(SciFiTheme.neonMagenta)
         .margin({ bottom: 10 })
       
       Row() {
         Column() {
-          Text(this.isKawaii ? "Finished! ✨" : "DATA_RESOLVED")
+          Text(this.isKawaii() ? "Finished! ✨" : "DATA_RESOLVED")
             .fontSize(12)
             .fontColor(SciFiTheme.textSecondary)
-          Rect().width(Math.max(10, this.completedCount * 30) + 'px').height(20).fill(SciFiTheme.neonGreen).borderRadius(5)
+          Rect().width(Math.max(10, this.getCompletedCount() * 30) + 'px').height(20).fill(SciFiTheme.neonGreen).borderRadius(5)
         }.alignItems(HorizontalAlign.Start)
         
         Blank()
         
         Column() {
-          Text(this.isKawaii ? "To Do 🐰" : "PENDING_OPS")
+          Text(this.isKawaii() ? "To Do 🐰" : "PENDING_OPS")
             .fontSize(12)
             .fontColor(SciFiTheme.textSecondary)
-          Rect().width(Math.max(10, this.pendingCount * 30) + 'px').height(20).fill(SciFiTheme.neonCyan).borderRadius(5)
+          Rect().width(Math.max(10, this.getPendingCount() * 30) + 'px').height(20).fill(SciFiTheme.neonCyan).borderRadius(5)
         }.alignItems(HorizontalAlign.End)
       }
       .width('100%')
@@ -215,14 +215,14 @@ struct TaskRowView {
   @StorageLink('app_theme') appThemeStr: string = 'scifi';
   @ObjectLink task: TaskDataModel;
   
-  get isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
+  isKawaii(): boolean { return this.appThemeStr === 'kawaii'; }
 
   build() {
     Row() {
       Column({ space: 6 }) {
         Row() {
           if (this.task.isMLGenerated) {
-            Text(this.isKawaii ? "🪄 " : "⚡ ")
+            Text(this.isKawaii() ? "🪄 " : "⚡ ")
               .fontColor(SciFiTheme.neonMagenta)
           }
           Text(this.task.title)
@@ -252,7 +252,7 @@ struct TaskRowView {
       Blank()
       
       Button({ type: ButtonType.Circle }) {
-        Text(this.task.completed ? (this.isKawaii ? "✓" : "⬢") : (this.isKawaii ? "○" : "⬡"))
+        Text(this.task.completed ? (this.isKawaii() ? "✓" : "⬢") : (this.isKawaii() ? "○" : "⬡"))
           .fontSize(24)
           .fontColor(this.task.completed ? SciFiTheme.neonGreen : SciFiTheme.neonCyan)
       }
