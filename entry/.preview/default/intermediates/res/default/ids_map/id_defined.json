@@ -23,5 +23,13 @@
 			"type":	"color",
 			"name":	"start_window_background",
 			"id":	"0x01000005"
+		}, {
+			"type":	"media",
+			"name":	"app_icon",
+			"id":	"0x01000006"
+		}, {
+			"type":	"media",
+			"name":	"icon",
+			"id":	"0x01000007"
 		}]
 }

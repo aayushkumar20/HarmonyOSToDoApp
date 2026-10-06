@@ -1,0 +1,11 @@
+import UIAbility from "@ohos:app.ability.UIAbility";
+import type window from "@ohos:window";
+export default class EntryAbility extends UIAbility {
+    onWindowStageCreate(windowStage: window.WindowStage) {
+        windowStage.loadContent('pages/Index', (err, data) => {
+            if (err.code) {
+                return;
+            }
+        });
+    }
+}

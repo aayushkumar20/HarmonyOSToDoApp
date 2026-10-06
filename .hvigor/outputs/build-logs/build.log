@@ -610,3 +610,310 @@ Error Message: The resource reference '$media:app_icon' is not defined. At file:
 [2026-10-06T21:57:42.960] [DEBUG] debug-file - session manager: send message to worker process.
 [2026-10-06T21:57:42.960] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
 [2026-10-06T21:57:42.960] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-10-06T21:58:49.540] [DEBUG] debug-file - session manager: set active socket. socketId=BRjbR9Rd2Ind0yElAAAF
+[2026-10-06T21:58:49.542] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-10-06T21:58:49.547] [DEBUG] debug-file - Workers' log level updated to INFO
+[2026-10-06T21:58:49.549] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined,
+  customizedParam: undefined
+}
+[2026-10-06T21:58:49.552] [DEBUG] debug-file - Cache service initialization finished in 3 ms 
+[2026-10-06T21:58:49.553] [DEBUG] debug-file - hvigorfile, resolving /Users/aayushkumar/Desktop/HarmonyOSToDoApp/hvigorfile.ts
+[2026-10-06T21:58:49.594] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2026-10-06T21:58:49.594] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2026-10-06T21:58:49.595] [DEBUG] debug-file - Starting plugin build process
+[2026-10-06T21:58:49.595] [DEBUG] debug-file - App plugin prepare start...
+[2026-10-06T21:58:49.595] [DEBUG] debug-file - App plugin prepare end...
+[2026-10-06T21:58:49.595] [DEBUG] debug-file - App plugin creating...
+[2026-10-06T21:58:49.602] [DEBUG] debug-file - App plugin register hook start...
+[2026-10-06T21:58:49.603] [DEBUG] debug-file - App plugin register hook end...
+[2026-10-06T21:58:49.603] [DEBUG] debug-file - Plugin build process completed
+[2026-10-06T21:58:49.603] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2026-10-06T21:58:49.603] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2026-10-06T21:58:49.603] [DEBUG] debug-file - Product 'default' build option initialized
+[2026-10-06T21:58:49.603] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2026-10-06T21:58:49.604] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2026-10-06T21:58:49.604] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2026-10-06T21:58:49.606] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2026-10-06T21:58:49.629] [DEBUG] debug-file - Sdk init in 25 ms 
+[2026-10-06T21:58:49.631] [DEBUG] debug-file - Project task initialization takes 2 ms 
+[2026-10-06T21:58:49.631] [DEBUG] debug-file - hvigorfile, begin to bind custom plugins...
+[2026-10-06T21:58:49.631] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/aayushkumar/Desktop/HarmonyOSToDoApp/hvigorfile.ts
+[2026-10-06T21:58:49.631] [DEBUG] debug-file - hvigorfile, resolve finished /Users/aayushkumar/Desktop/HarmonyOSToDoApp/hvigorfile.ts
+[2026-10-06T21:58:49.631] [DEBUG] debug-file - hvigorfile, resolving /Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/hvigorfile.ts
+[2026-10-06T21:58:49.633] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2026-10-06T21:58:49.633] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2026-10-06T21:58:49.634] [DEBUG] debug-file - Starting plugin build process
+[2026-10-06T21:58:49.634] [DEBUG] debug-file - Hap plugin creating...
+[2026-10-06T21:58:49.634] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/hooks/cangjie-register.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/strategy/stage-init-strategy.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/builder/abstract-plugin-builder.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/builder/app-plugin-builder.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/aayushkumar/Desktop/HarmonyOSToDoApp/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/process/daemon-process-boot-script.js
+[2026-10-06T21:58:49.640] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Target 'default' config initialized
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Target 'default' config initialized
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Target 'default' config initialized
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-10-06T21:58:49.641] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2026-10-06T21:58:49.643] [DEBUG] debug-file - Module entry task initialization takes 2 ms 
+[2026-10-06T21:58:49.643] [DEBUG] debug-file - Hap plugin register hook start...
+[2026-10-06T21:58:49.643] [DEBUG] debug-file - Hap plugin register hook end...
+[2026-10-06T21:58:49.644] [DEBUG] debug-file - Plugin build process completed
+[2026-10-06T21:58:49.644] [DEBUG] debug-file - hvigorfile, begin to bind custom plugins...
+[2026-10-06T21:58:49.644] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/hvigorfile.ts
+[2026-10-06T21:58:49.644] [DEBUG] debug-file - hvigorfile, resolve finished /Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/hvigorfile.ts
+[2026-10-06T21:58:49.690] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 47 ms 
+[2026-10-06T21:58:49.690] [DEBUG] debug-file - project has submodules:entry
+[2026-10-06T21:58:49.691] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2026-10-06T21:58:49.692] [DEBUG] debug-file - load to the disk finished
+[2026-10-06T21:58:49.693] [DEBUG] debug-file - Start to initialize dependency information.
+[2026-10-06T21:58:49.693] [DEBUG] debug-file - Module HarmonyOSToDoApp Collected Dependency: 
+[2026-10-06T21:58:49.693] [DEBUG] debug-file - Module HarmonyOSToDoApp's total dependency: 0
+[2026-10-06T21:58:49.694] [DEBUG] debug-file - Start to initialize dependency information.
+[2026-10-06T21:58:49.694] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2026-10-06T21:58:49.694] [DEBUG] debug-file - Module entry's total dependency: 0
+[2026-10-06T21:58:49.695] [DEBUG] debug-file - Configuration phase cost:143 ms 
+[2026-10-06T21:58:49.696] [DEBUG] debug-file - Configuration task cost before running: 149 ms 
+[2026-10-06T21:58:49.698] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2026-10-06T21:58:49.700] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.702] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 2 ms .
+[2026-10-06T21:58:49.702] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.49188995361328125
+[2026-10-06T21:58:49.702] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2026-10-06T21:58:49.702] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2026-10-06T21:58:49.703] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.703] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.0417938232421875
+[2026-10-06T21:58:49.703] [DEBUG] debug-file - runTaskFromQueue task cost before running: 156 ms 
+[2026-10-06T21:58:49.703] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 1 ms 
+[2026-10-06T21:58:49.703] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2026-10-06T21:58:49.703] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.704] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 1 ms .
+[2026-10-06T21:58:49.704] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.120269775390625
+[2026-10-06T21:58:49.704] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2026-10-06T21:58:49.704] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2026-10-06T21:58:49.704] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.705] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 1 ms .
+[2026-10-06T21:58:49.705] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.09717559814453125
+[2026-10-06T21:58:49.705] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2026-10-06T21:58:49.705] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2026-10-06T21:58:49.705] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.01485443115234375
+[2026-10-06T21:58:49.705] [DEBUG] debug-file - runTaskFromQueue task cost before running: 158 ms 
+[2026-10-06T21:58:49.705] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2026-10-06T21:58:49.705] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2026-10-06T21:58:49.707] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.707] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.279022216796875
+[2026-10-06T21:58:49.707] [DEBUG] debug-file - runTaskFromQueue task cost before running: 160 ms 
+[2026-10-06T21:58:49.707] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 2 ms 
+[2026-10-06T21:58:49.708] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2026-10-06T21:58:49.708] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.709] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2026-10-06T21:58:49.709] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.11791229248046875
+[2026-10-06T21:58:49.709] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2026-10-06T21:58:49.709] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2026-10-06T21:58:49.709] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 1 ms .
+[2026-10-06T21:58:49.710] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.099090576171875
+[2026-10-06T21:58:49.710] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2026-10-06T21:58:49.710] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2026-10-06T21:58:49.710] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig pre-execution cost: 1 ms .
+[2026-10-06T21:58:49.710] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory 0.081573486328125
+[2026-10-06T21:58:49.710] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessShareConfig...  
+[2026-10-06T21:58:49.711] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2026-10-06T21:58:49.711] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.711] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/startup/default/startup_config.json' does not exist.
+[2026-10-06T21:58:49.711] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2026-10-06T21:58:49.711] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.07721710205078125
+[2026-10-06T21:58:49.711] [DEBUG] debug-file - runTaskFromQueue task cost before running: 164 ms 
+[2026-10-06T21:58:49.711] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 1 ms 
+[2026-10-06T21:58:49.711] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@PreviewProcessResource
+[2026-10-06T21:58:49.713] [DEBUG] debug-file - Executing task :entry:default@PreviewProcessResource
+[2026-10-06T21:58:49.713] [DEBUG] debug-file - Task 'entry:default@PreviewProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.713] [DEBUG] debug-file - entry : default@PreviewProcessResource cost memory -3.7642974853515625
+[2026-10-06T21:58:49.713] [DEBUG] debug-file - runTaskFromQueue task cost before running: 166 ms 
+[2026-10-06T21:58:49.713] [INFO] debug-file - Finished :entry:default@PreviewProcessResource... after 2 ms 
+[2026-10-06T21:58:49.714] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2026-10-06T21:58:49.715] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.717] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 2 ms .
+[2026-10-06T21:58:49.717] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.42545318603515625
+[2026-10-06T21:58:49.718] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2026-10-06T21:58:49.718] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@PreviewCompileResource
+[2026-10-06T21:58:49.719] [DEBUG] debug-file - Executing task :entry:default@PreviewCompileResource
+[2026-10-06T21:58:49.752] [DEBUG] debug-file - Use tool [/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool]
+ [
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool',
+  '-x',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/AppScope/resources',
+  '-o',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/app_compiled'
+]
+[2026-10-06T21:58:49.752] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 227672064,
+  heapTotal: 149667840,
+  heapUsed: 132262584,
+  external: 3447794,
+  arrayBuffers: 1414791
+} os memoryUsage :15.882080078125
+[2026-10-06T21:58:49.776] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2026-10-06T21:58:49.777] [DEBUG] debug-file - Use tool [/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool]
+ [
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool',
+  '-x',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/resources',
+  '-o',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/module_compiled'
+]
+[2026-10-06T21:58:49.778] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 226590720,
+  heapTotal: 164315136,
+  heapUsed: 117993760,
+  external: 3209600,
+  arrayBuffers: 277504
+} os memoryUsage :15.896148681640625
+[2026-10-06T21:58:49.791] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2026-10-06T21:58:49.792] [DEBUG] debug-file - Use tool [/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool]
+ [
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool',
+  '-m',
+  'entry',
+  '-f',
+  '-j',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/process_profile/default/module.json',
+  '-p',
+  'c***s',
+  '-r',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/generated/r/default/ResourceTable.h',
+  '-z',
+  '--ids',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/ids_map',
+  '--defined-ids',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/ids_map/id_defined.json',
+  '-i',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/app_compiled',
+  '-i',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/module_compiled',
+  '-o',
+  '/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default',
+  '--defined-sysids',
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/hms/toolchains/id_defined.json'
+]
+[2026-10-06T21:58:49.792] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 226590720,
+  heapTotal: 164315136,
+  heapUsed: 118115072,
+  external: 3209648,
+  arrayBuffers: 277552
+} os memoryUsage :15.896148681640625
+[2026-10-06T21:58:49.845] [DEBUG] debug-file - Info: hardware concurrency count is : 8
+Info: thread count is : 8
+
+[2026-10-06T21:58:49.845] [DEBUG] debug-file - Info: thread pool is started
+
+[2026-10-06T21:58:49.848] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2026-10-06T21:58:49.848] [DEBUG] debug-file - Info: thread pool is stopped
+
+[2026-10-06T21:58:49.851] [DEBUG] debug-file - entry : default@PreviewCompileResource cost memory -9.486114501953125
+[2026-10-06T21:58:49.851] [DEBUG] debug-file - runTaskFromQueue task cost before running: 304 ms 
+[2026-10-06T21:58:49.851] [INFO] debug-file - Finished :entry:default@PreviewCompileResource... after 132 ms 
+[2026-10-06T21:58:49.851] [DEBUG] debug-file - Executing task :entry:default@PreviewHookCompileResource
+[2026-10-06T21:58:49.851] [DEBUG] debug-file - entry : default@PreviewHookCompileResource cost memory 0.01537322998046875
+[2026-10-06T21:58:49.851] [DEBUG] debug-file - runTaskFromQueue task cost before running: 304 ms 
+[2026-10-06T21:58:49.851] [INFO] debug-file - Finished :entry:default@PreviewHookCompileResource... after 1 ms 
+[2026-10-06T21:58:49.852] [DEBUG] debug-file - Executing task :entry:default@CopyPreviewProfile
+[2026-10-06T21:58:49.853] [DEBUG] debug-file - entry : default@CopyPreviewProfile cost memory 0.10004425048828125
+[2026-10-06T21:58:49.854] [DEBUG] debug-file - runTaskFromQueue task cost before running: 306 ms 
+[2026-10-06T21:58:49.854] [INFO] debug-file - Finished :entry:default@CopyPreviewProfile... after 2 ms 
+[2026-10-06T21:58:49.854] [DEBUG] debug-file - Executing task :entry:default@ReplacePreviewerPage
+[2026-10-06T21:58:49.854] [DEBUG] debug-file - entry : default@ReplacePreviewerPage cost memory 0.0148162841796875
+[2026-10-06T21:58:49.854] [DEBUG] debug-file - runTaskFromQueue task cost before running: 307 ms 
+[2026-10-06T21:58:49.854] [INFO] debug-file - Finished :entry:default@ReplacePreviewerPage... after 1 ms 
+[2026-10-06T21:58:49.854] [DEBUG] debug-file - Executing task :entry:buildPreviewerResource
+[2026-10-06T21:58:49.855] [DEBUG] debug-file - entry : buildPreviewerResource cost memory 0.07117462158203125
+[2026-10-06T21:58:49.855] [DEBUG] debug-file - runTaskFromQueue task cost before running: 308 ms 
+[2026-10-06T21:58:49.855] [INFO] debug-file - Finished :entry:buildPreviewerResource... after 1 ms 
+[2026-10-06T21:58:49.855] [DEBUG] debug-file - Executing task :entry:default@PreviewUpdateAssets
+[2026-10-06T21:58:49.856] [DEBUG] debug-file - entry : default@PreviewUpdateAssets cost memory 0.05764007568359375
+[2026-10-06T21:58:49.856] [DEBUG] debug-file - runTaskFromQueue task cost before running: 309 ms 
+[2026-10-06T21:58:49.856] [INFO] debug-file - Finished :entry:default@PreviewUpdateAssets... after 1 ms 
+[2026-10-06T21:58:49.857] [DEBUG] debug-file - Executing task :entry:default@PreviewArkTS
+[2026-10-06T21:58:49.857] [DEBUG] debug-file - obfuscationOptions: undefined
+[2026-10-06T21:58:49.858] [DEBUG] debug-file - Task 'entry:default@PreviewArkTS' cost while wrapping incremental declarations: 1 ms 
+[2026-10-06T21:58:49.862] [DEBUG] debug-file - No watchWorker available for preview
+[2026-10-06T21:58:49.863] [DEBUG] debug-file - Can not reuse worker, create new worker for preview
+[2026-10-06T21:58:49.864] [DEBUG] debug-file - session manager: binding session. socketId=BRjbR9Rd2Ind0yElAAAF, threadId=1@1.
+[2026-10-06T21:58:49.864] [DEBUG] debug-file - entry : default@PreviewArkTS cost memory 0.9629058837890625
+[2026-10-06T21:58:50.939] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchStart
+[2026-10-06T21:58:50.940] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchStart
+[2026-10-06T21:58:54.939] [DEBUG] debug-file - Ark compile finished.
+[2026-10-06T21:58:54.939] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchResult
+[2026-10-06T21:58:54.940] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchResult
+[2026-10-06T21:58:54.940] [INFO] debug-file - Finished :entry:default@PreviewArkTS... after 5 s 84 ms 
+[2026-10-06T21:58:54.940] [DEBUG] debug-file - Executing task :entry:PreviewBuild
+[2026-10-06T21:58:54.941] [DEBUG] debug-file - entry : PreviewBuild cost memory 0.01264190673828125
+[2026-10-06T21:58:54.941] [DEBUG] debug-file - runTaskFromQueue task cost before running: 5 s 394 ms 
+[2026-10-06T21:58:54.941] [INFO] debug-file - Finished :entry:PreviewBuild... after 1 ms 
+[2026-10-06T21:58:54.941] [INFO] debug-file - BUILD SUCCESSFUL in 5 s 394 ms 
+[2026-10-06T21:58:54.941] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2026-10-06T21:58:54.941] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/generated/profile/default/ModuleInfo.ts cache.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/loader/default/pkgContextInfo.json cache.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessShareConfig is up-to-date.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/startup/default/startup_config.json cache.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/resources cache by regenerate.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/merge_profile/default/module.json cache by regenerate.
+[2026-10-06T21:58:54.942] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default cache.
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/generated/r/default cache.
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Incremental task entry:default@PreviewCompileResource post-execution cost:2 ms .
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Update task entry:default@CopyPreviewProfile input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/resources/base/profile cache by regenerate.
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Update task entry:default@CopyPreviewProfile output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/resources/base/profile cache.
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Incremental task entry:default@CopyPreviewProfile post-execution cost:1 ms .
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Update task entry:default@PreviewUpdateAssets output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/module.json cache.
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Update task entry:default@PreviewUpdateAssets output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/resources/base/profile/main_pages.json cache.
+[2026-10-06T21:58:54.943] [DEBUG] debug-file - Incremental task entry:default@PreviewUpdateAssets post-execution cost:1 ms .
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/loader/default cache by regenerate.
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/ResourceTable.txt cache by regenerate.
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/process_profile/default/module.json cache by regenerate.
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/res/default/resources/base/profile cache by regenerate.
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/src/main/ets cache by regenerate.
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/generated/profile/default/BuildProfile.ets cache by regenerate.
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Update task entry:default@PreviewArkTS output file:/Users/aayushkumar/Desktop/HarmonyOSToDoApp/entry/.preview/default/intermediates/loader_out/default/ets cache.
+[2026-10-06T21:58:54.944] [DEBUG] debug-file - Incremental task entry:default@PreviewArkTS post-execution cost:1 ms .
+[2026-10-06T21:58:54.949] [DEBUG] debug-file - There's no busy workers and idle workers need cleanup.
+[2026-10-06T21:58:54.949] [DEBUG] debug-file - hvigor build process will be closed.
+[2026-10-06T21:59:49.033] [DEBUG] debug-file - session manager: send message to worker process.
+[2026-10-06T21:59:49.033] [DEBUG] debug-file - session manager: send message to worker process.
+[2026-10-06T21:59:49.050] [DEBUG] debug-file - bad codeSnippet [object Object]
+[2026-10-06T21:59:49.057] [DEBUG] debug-file - watch worker: worker is ready to be terminated.
+[2026-10-06T21:59:49.058] [DEBUG] debug-file - Server currently has 0 watch-worker
