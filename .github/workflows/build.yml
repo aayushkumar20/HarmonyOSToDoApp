@@ -1,0 +1,44 @@
+name: HarmonyOS Build Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # NOTE: Because the HarmonyOS SDK requires a Huawei Developer account to download, 
+    # GitHub does not have it pre-installed on 'ubuntu-latest'.
+    # To run this successfully, you will need to either use a self-hosted runner (like your Mac)
+    # or use a custom Docker container that already has the SDK downloaded.
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Make Hvigor Executable
+      run: chmod +x ./hvigorw
+
+    - name: Install OHPM Dependencies
+      run: |
+        # If you have an oh-package.json5, install dependencies using ohpm (if installed in the runner)
+        # ./ohpm install
+        echo "Dependencies handled by hvigor"
+
+    - name: Build HarmonyOS HAP
+      # This step executes the local hvigor wrapper to compile the .hap file.
+      # It expects the DEVECO_SDK_HOME environment variable to be set on the runner.
+      run: ./hvigorw assembleHap --mode module -p module=entry@default -p product=default
+
+    - name: Upload HAP Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ToDoApp-HAP
+        path: entry/build/default/outputs/default/*.hap
